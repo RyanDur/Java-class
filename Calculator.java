@@ -3,9 +3,7 @@ import java.io.*;
 public class Calculator {
     public static void main(String []args) {
         Console console = System.console();
-        int number1 = Integer.parseInt(args[0]);
-        int number2 = Integer.parseInt(args[1]);
-        Calculator calc = new Calculator(number1, number2);
+        Calculator calc = new Calculator(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
 
         calc.menu();
 
