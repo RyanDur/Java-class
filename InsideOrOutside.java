@@ -19,8 +19,8 @@ public class InsideOrOutside {
     public static void main(String []args) {
         InsideOrOutside insideOrOutside = new InsideOrOutside(new Rectangle(new Point("point1", 5,6), new Point("point2", 1,2)));
 
-        Point point1 = new Point("point3", 3,4);
-        Point point2 = new Point("point3", 7,8);
+        Point point1 = new Point("point1", 3,4);
+        Point point2 = new Point("point2", 7,8);
 
         System.out.println(insideOrOutside.isWithin(point1));
         System.out.println(insideOrOutside.isWithin(point2));
