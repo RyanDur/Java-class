@@ -16,8 +16,13 @@ public class PalindromeRedux {
     public static void main(String []args) {
         Console console = System.console();
         PalindromeRedux pr = new PalindromeRedux();
+
         System.out.print("Please write a text: ");
         String text = console.readLine().replaceAll("\\W", "").toLowerCase();
-        System.out.println(pr.isPalindrome(text));
+        if(pr.isPalindrome(text)) {
+            System.out.println("It's a palindrome!!");
+        } else {
+            System.out.println("It's not a palindrome.");
+        }
     }
 }
