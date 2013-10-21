@@ -947,3 +947,61 @@ student.father = john
 student.mother = mary
 
 Then printing happens YAY!!
+
+
+
+2.3 Flow of Execution
+
+    1. 4, 0
+       println "Invalid option. Please try again." - 67
+
+    2. 1, john, 0
+       createUser(); - 6
+       requestUser(); - 7
+           String result = System.console().readLine(); return result; - 2,3
+       !isValidUser(user) - 17
+           return true; - 48
+       insertUserInDB(user); - 12
+       break; - 62
+       
+    3. 1, john smith, johnsmith, 0
+       createUser(); - 6
+       requestUser(); - 7
+           String result = System.console().readLine(); return result; - 2,3
+       !isValidUser(user) - 17
+           return false; - 48
+       println("That name is not valid. Please try again.); - 9
+       user = requestUser(); - 7
+           String result = System.console().readLine(); return result; - 2,3
+       !isValidUser(user) - 17
+           return true; 48
+       insertUserInDB(user); - 12
+       println "Invalid option. Please try again." - 67
+       break; - 62
+
+    4. 2, userNotInDB, 0
+       deleteUser(); - 63
+       String user = requestUser(); - 16
+           String result = System.console().readLine(); return result; - 2,3
+       !isValidUser(user) - 17
+           return true; 48
+       existsInDB(user) - 21 technically it would break here since the syntax is wrong.
+       boolean existsInDB(String user) { - 36
+       println "That user does not exist." -24
+       break; - 62
+
+    5. 1, john, 2, john, 0
+       createUser(); - 63
+       requestUser(); - 7
+           String result = System.console().readLine(); return result; - 2,3
+       !isValidUser(user) - 17
+           return true; 48
+       insertUserInDB(user); - 12
+       deleteUser(); - 63
+       String user = requestUser(); - 16
+           String result = System.console().readLine(); return result; - 2,3
+       !isValidUser(user) - 17
+           return true; 48
+       if (existsInDB(user) { - 21
+           deleteUserInDB(user); -22
+       break; - 62
