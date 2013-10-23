@@ -1,0 +1,97 @@
+1 Recursive code, line by line
+* a)
+** What number would the following method print on screen if you called printNumbers(6)?
+
+*** void printNumbers(int n) {
+**** if (n <= 0) {
+***** return;
+**** }
+
+**** printLine(n);
+**** printNumbers(n-2);
+**** printNumbers(n-3);
+**** printLine(n);
+*** }
+
+
+** answer:
+*** print 6, printNumbers(6 - 2)
+**** print 4, printNumbers(4 - 2)
+***** print 2, printNumbers(2 - 2)
+****** 0 return
+***** printNumbers(2 - 3)
+****** -1 return
+***** print 2
+**** printNumbers(4 - 3)
+***** print 1, printNumbers(1 - 2)
+****** -1, return
+***** printNumbers(1 - 3)
+****** -2 return
+***** print 1
+**** print 4
+*** printNumber(6 - 3)
+**** print 3, printNumber(3 - 2)
+***** print 1, printNumber(1 - 2)
+****** -1 return
+***** printNumber(1 - 3)
+****** -2 return
+***** print 1
+**** print 3
+*** print 6
+
+
+*** 6, 4, 2, 2, 1, 1, 3, 1, 1, 3, 6
+
+
+* b)
+** Do you see anything wrong with the following code? How would you ﬁx it?
+
+*** String buggyMethod(int n) {
+**** if (n == 0) {
+***** return "";
+**** }
+
+**** return n + " " + buggyMethod(n - 2);
+*** }
+
+** answer:
+*** Needs a better guard condition. n could be less than zero and n could possibly never be zero. I would change "==" to "<=".
+
+
+* c)
+** Do you see anything wrong with the following code? How would you ﬁx it?
+
+*** String doggyMethod(int n) {
+**** String result = doggyMethod(n-3) + n + doggyMethod(n-2);
+**** if (n <= 0) {
+***** return "";
+**** }
+
+**** return result;
+*** }
+
+** answer:
+*** The guard condition comes after the recursion. The guard condition should be the first thing called in the method;
+
+
+* d) McCarthy’s 91 function
+** Calculate the result of calling this method with arguments 50, 73, and 95. Note that the recursion on line 5 is double.
+
+*** int mcCarthy91(int n) {
+**** if (n > 100) {
+***** return n - 10;
+**** } else {
+***** return mcCarthy91(mcCarthy91(n+11));
+**** }
+*** }
+
+* answer:
+
+** input 50
+*** 50 + 11 = 61
+**** 61 + 11 = 72
+***** 72 + 11 = 83
+****** 83 + 11 = 94
+******* 94 + 11 = 105
+******** 105 - 10 = 95
+******* 95
