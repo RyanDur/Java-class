@@ -1,6 +1,6 @@
 * 1 Recursive code, line by line
 *** a)
-_____
+
 **** What number would the following method print on screen if you called printNumbers(6)?
 
 #+BEGIN_SRC java
@@ -47,7 +47,7 @@ _____
 
 *** 6, 4, 2, 2, 1, 1, 3, 1, 1, 3, 6
 
-
+-----
 *** b)
 **** Do you see anything wrong with the following code? How would you ﬁx it?
 
@@ -64,7 +64,7 @@ _____
 **** answer:
    Needs a better guard condition. n could be less than zero and n could possibly never be zero. I would change "==" to "<=".
 
-
+-----
 *** c)
 **** Do you see anything wrong with the following code? How would you ﬁx it?
 
@@ -82,7 +82,7 @@ _____
 **** answer:
    The guard condition comes after the recursion. The guard condition should be the first thing called in the method;
 
-
+-----
 *** d) McCarthy’s 91 function
 **** Calculate the result of calling this method with arguments 50, 73, and 95. Note that the recursion on line 5 is double.
 
