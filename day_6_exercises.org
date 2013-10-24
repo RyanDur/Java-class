@@ -205,3 +205,83 @@ mcCarthy91(100 + 11) = 111
 return 101 - 10 = 91
 #+END_SRC
 ****** output 91
+
+****** input 73
+#+BEGIN_SRC java
+mcCarthy91(73 + 11) = 84
+ mcCarthy91(84 + 11) = 95
+  mcCarthy91(95 + 11) = 106
+   return 106 - 10 = 96
+  mcCarthy91(96 + 11) = 107
+   return 107 - 10 = 97
+  mcCarthy91(97 + 11) = 108
+   return 108 - 10 = 98
+  mcCarthy91(98 + 11) = 109
+   return 109 - 10 = 99
+  mcCarthy91(99 + 11) = 110
+   return 110 - 10 = 100
+  mcCarthy91(100 + 11) = 111
+   return 111 - 10 = 101
+  return 101 - 10 = 91
+ mcCarthy91(91 + 11) = 102
+  return 102 - 10 = 92
+ mcCarthy91(92 + 11) = 103
+  return 103 - 10 = 93
+ mcCarthy91(93 + 11) = 104
+  return 104 - 10 = 94
+ mcCarthy91(94 + 11) = 105
+  return 105 - 10 = 95
+ mcCarthy91(95 + 11) = 106
+  return 106 - 10 = 96
+ mcCarthy91(96 + 11) = 107
+  return 107 - 10 = 97
+ mcCarthy91(97 + 11) = 108
+  return 108 - 10 = 98
+ mcCarthy91(98 + 11) = 109
+  return 109 - 10 = 99
+ mcCarthy91(99 + 11) = 110
+  return 110 - 10 = 100
+ mcCarthy91(100 + 11) = 111
+  return 111 - 10 = 101
+ return 101 - 10 = 91
+mcCarthy91(91 + 11) = 102
+ return 102 - 10 = 92
+mcCarthy91(92 + 11) = 103
+ return 103 - 10 = 93
+mcCarthy91(93 + 11) = 104
+ return 104 - 10 = 94
+mcCarthy91(94 + 11) = 105
+ return 105 - 10 = 95
+mcCarthy91(95 + 11) = 106
+ return 106 - 10 = 96
+mcCarthy91(96 + 11) = 107
+ return 107 - 10 = 97
+mcCarthy91(97 + 11) = 108
+ return 108 - 10 = 98
+mcCarthy91(98 + 11) = 109
+ return 109 - 10 = 99
+mcCarthy91(99 + 11) = 110
+ return 110 - 10 = 100
+mcCarthy91(100 + 11) = 111
+ return 111 - 10 = 101
+return 101 - 10 = 91
+#+END_SRC
+****** output 91
+
+****** input 95
+#+BEGIN_SRC java
+mcCarthy91(95 + 11) = 106
+ return 106 - 10 = 96
+mcCarthy91(96 + 11) = 107
+ return 107 - 10 = 97
+mcCarthy91(97 + 11) = 108
+ return 108 - 10 = 98
+mcCarthy91(98 + 11) = 109
+ return 109 - 10 = 99
+mcCarthy91(99 + 11) = 110
+ return 110 - 10 = 100
+mcCarthy91(100 + 11) = 111
+ return 111 - 10 = 101
+return 101 - 10 = 91
+#+END_SRC
+****** output 91
