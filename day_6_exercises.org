@@ -1,6 +1,6 @@
 1 Recursive code, line by line
 * a)
-** What number would the following method print on screen if you called printNumbers(6)?
+*** What number would the following method print on screen if you called printNumbers(6)?
 
 #+BEGIN_SRC java
     void printNumbers(int n) {
@@ -16,7 +16,7 @@
 #+END_SRC
 
 
-** answer:
+*** answer:
 
 #+BEGIN_SRC java
     print 6, printNumbers(6 - 2)
@@ -48,7 +48,7 @@
 
 
 * b)
-** Do you see anything wrong with the following code? How would you ﬁx it?
+*** Do you see anything wrong with the following code? How would you ﬁx it?
 
 #+BEGIN_SRC java
  String buggyMethod(int n) {
@@ -60,12 +60,12 @@
  }
 #+END_SRC
 
-** answer:
+*** answer:
    Needs a better guard condition. n could be less than zero and n could possibly never be zero. I would change "==" to "<=".
 
 
 * c)
-** Do you see anything wrong with the following code? How would you ﬁx it?
+*** Do you see anything wrong with the following code? How would you ﬁx it?
 
 #+BEGIN_SRC java
  String doggyMethod(int n) {
@@ -78,22 +78,24 @@
  }
 #+END_SRC
 
-** answer:
+*** answer:
    The guard condition comes after the recursion. The guard condition should be the first thing called in the method;
 
 
 * d) McCarthy’s 91 function
-** Calculate the result of calling this method with arguments 50, 73, and 95. Note that the recursion on line 5 is double.
+*** Calculate the result of calling this method with arguments 50, 73, and 95. Note that the recursion on line 5 is double.
 
-*** int mcCarthy91(int n) {
-**** if (n > 100) {
-***** return n - 10;
-**** } else {
-***** return mcCarthy91(mcCarthy91(n+11));
-**** }
-*** }
+#+BEGIN_SRC java
+ int mcCarthy91(int n) {
+   if (n > 100) {
+     return n - 10;
+   } else {
+     return mcCarthy91(mcCarthy91(n+11));
+   }
+ }
+#+END_SRC
 
-* answer:
+*** answer:
 
 ** input 50
 *** 50 + 11 = 61
