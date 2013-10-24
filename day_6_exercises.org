@@ -50,16 +50,18 @@
 * b)
 ** Do you see anything wrong with the following code? How would you ﬁx it?
 
-*** String buggyMethod(int n) {
-**** if (n == 0) {
-***** return "";
-**** }
+#+BEGIN_SRC java
+ String buggyMethod(int n) {
+  if (n == 0) {
+   return "";
+  }
 
-**** return n + " " + buggyMethod(n - 2);
-*** }
+  return n + " " + buggyMethod(n - 2);
+ }
+#+END_SRC
 
 ** answer:
-*** Needs a better guard condition. n could be less than zero and n could possibly never be zero. I would change "==" to "<=".
+***** Needs a better guard condition. n could be less than zero and n could possibly never be zero. I would change "==" to "<=".
 
 
 * c)
