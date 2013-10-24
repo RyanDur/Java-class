@@ -2,7 +2,8 @@
 * a)
 ** What number would the following method print on screen if you called printNumbers(6)?
 
-*** void printNumbers(int n) {
+#+BEGIN_SRC java
+    void printNumbers(int n) {
      if (n <= 0) {
       return;
      }
@@ -12,6 +13,7 @@
      printNumbers(n-3);
      printLine(n);
     }
+#+END_SRC
 
 
 ** answer:
