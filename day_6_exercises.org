@@ -61,7 +61,7 @@
 #+END_SRC
 
 ** answer:
-***** Needs a better guard condition. n could be less than zero and n could possibly never be zero. I would change "==" to "<=".
+   Needs a better guard condition. n could be less than zero and n could possibly never be zero. I would change "==" to "<=".
 
 
 * c)
