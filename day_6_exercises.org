@@ -4,14 +4,14 @@
 
 #+BEGIN_SRC java
     void printNumbers(int n) {
-     if (n <= 0) {
-      return;
-     }
+      if (n <= 0) {
+        return;
+      }
 
-     printLine(n);
-     printNumbers(n-2);
-     printNumbers(n-3);
-     printLine(n);
+      printLine(n);
+      printNumbers(n-2);
+      printNumbers(n-3);
+      printLine(n);
     }
 #+END_SRC
 
@@ -52,11 +52,11 @@
 
 #+BEGIN_SRC java
  String buggyMethod(int n) {
-  if (n == 0) {
-   return "";
-  }
+   if (n == 0) {
+     return "";
+   }
 
-  return n + " " + buggyMethod(n - 2);
+   return n + " " + buggyMethod(n - 2);
  }
 #+END_SRC
 
@@ -70,8 +70,8 @@
 #+BEGIN_SRC java
  String doggyMethod(int n) {
    String result = doggyMethod(n-3) + n + doggyMethod(n-2);
-     if (n <= 0) {
-      return "";
+   if (n <= 0) {
+     return "";
    }
 
    return result;
