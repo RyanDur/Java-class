@@ -67,17 +67,19 @@
 * c)
 ** Do you see anything wrong with the following code? How would you ﬁx it?
 
-*** String doggyMethod(int n) {
-**** String result = doggyMethod(n-3) + n + doggyMethod(n-2);
-**** if (n <= 0) {
-***** return "";
-**** }
+#+BEGIN_SRC java
+ String doggyMethod(int n) {
+  String result = doggyMethod(n-3) + n + doggyMethod(n-2);
+  if (n <= 0) {
+   return "";
+  }
 
-**** return result;
-*** }
+  return result;
+ }
+#+END_SRC
 
 ** answer:
-*** The guard condition comes after the recursion. The guard condition should be the first thing called in the method;
+   The guard condition comes after the recursion. The guard condition should be the first thing called in the method;
 
 
 * d) McCarthy’s 91 function
