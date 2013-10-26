@@ -8,10 +8,6 @@ public class Tower {
 	name = n;
     }
 
-    public Disk top() {
-	return tower.get(tower.size()-1);
-    }
-
     public void set(Disk disk) {
 	tower.add(disk);
     }
