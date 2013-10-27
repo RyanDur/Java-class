@@ -31,20 +31,28 @@ public class Matrix {
         }
     }
 
+    public void prettyPrint() {
+        for(int i = 0; i < matrix.length; i++) {
+            for(int j = 0; j < matrix[i].length; j++) {
+		System.out.print("\t"+ matrix[i][j] +"\t");
+            }
+	    System.out.println("");
+        }
+    }
+
     public String toString() {
         String result = "[";
         for(int i = 0; i < matrix.length; i++) {
             for(int j = 0; j < matrix[i].length; j++) {
-                if(i > 0 && j % matrix.length == 0) {
-                    result += ";";
+                if(j == matrix[i].length-1) {
+                    result += matrix[i][j];
+                } else {
+                    result += matrix[i][j] + ",";
                 }
 
-		if(j == matrix[i].length-1) {
-		    result += matrix[i][j];
-		} else {
-		    result += matrix[i][j] + ",";
-		}
-
+            }
+            if(i != matrix.length-1) {
+                result += ";";
             }
         }
         return result + "]";

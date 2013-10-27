@@ -12,5 +12,7 @@ public class CreatingMatrices {
 
         matrix.setElement(2,2,10);
         System.out.println(matrix);
+
+	matrix.prettyPrint();
     }
 }
