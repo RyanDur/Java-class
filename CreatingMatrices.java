@@ -14,5 +14,8 @@ public class CreatingMatrices {
         System.out.println(matrix);
 
 	matrix.prettyPrint();
+
+	matrix.setMatrix("9,9,9;9,9,9;9,9,9");
+	System.out.println(matrix);
     }
 }

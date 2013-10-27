@@ -40,6 +40,13 @@ public class Matrix {
         }
     }
 
+    public void setMatrix(String matrixString) {
+	String[] splitMatrixString = matrixString.split(";");
+	for(int i = 0; i < splitMatrixString.length; i++) {
+	    setRow(i, splitMatrixString[i]);
+	}
+    }
+
     public String toString() {
         String result = "[";
         for(int i = 0; i < matrix.length; i++) {
