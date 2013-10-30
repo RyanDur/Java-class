@@ -44,5 +44,14 @@ public class SinglyLinkedLists {
         manager.delete(patient1);
         System.out.println(" ");
         manager.printList();
+
+        manager.delete(patient4);
+        System.out.println(" ");
+        manager.printList();
+
+        manager.add(new PatientNode(new Patient("Ryan", 34, "Too tall")));
+        manager.delete(patient7);
+        System.out.println(" ");
+        manager.printList();
     }
 }

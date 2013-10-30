@@ -16,8 +16,12 @@ public class SinglyLinkedList {
     }
 
     public void delete(Node node) {
-        if(helper == node || helper.getNext() == node) {
-            Node temp = node.getNext();
+        Node temp = node.getNext();
+        if(nodeListStart == node) {
+            node.setNext(null);
+            nodeListStart = temp;
+            helper = nodeListStart;
+        } else if(helper.getNext() == node) {
             node.setNext(null);
             helper.setNext(temp);
             helper = nodeListStart;
