@@ -12,23 +12,20 @@ public class Patient {
     }
 
     public void addPatient(Patient newPatient) {
-        if (this.nextPatient == null) {
-            this.nextPatient = newPatient;
+        if (nextPatient == null) {
+            nextPatient = newPatient;
         } else {
-            this.nextPatient.addPatient(newPatient);
+            nextPatient.addPatient(newPatient);
         }
     }
 
-    public boolean deletePatient(Patient patient) {
-        if (this.nextPatient == null) {
-            return false;
-        }  else if (this.nextPatient.name.equals(patient.name)) {
-            Patient temp = nextPatient.nextPatient;
-            nextPatient.nextPatient = null;
-            this.nextPatient = temp;
-            return true;
+    public void deletePatient(Patient patient) {
+        if (nextPatient == patient) {
+            Patient temp = patient.getNextPatient();
+            patient.setNextPatient(null);
+            nextPatient = temp;
         } else {
-            return this.nextPatient.deletePatient(patient);
+            nextPatient.deletePatient(patient);
         }
     }
 
@@ -39,7 +36,7 @@ public class Patient {
 
         if(nextPatient != null) {
             nextPatient.print();
-        }
+	}
     }
 
     public Patient getNextPatient() {
@@ -48,10 +45,6 @@ public class Patient {
 
     public void setNextPatient(Patient patient) {
         nextPatient = patient;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int size() {

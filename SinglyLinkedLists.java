@@ -10,7 +10,7 @@ public class SinglyLinkedLists {
     }
 
     public void deletePatient(Patient patient) {
-        if(patientListStart.getName().equals(patient.getName())) {
+        if(patientListStart == patient) {
 	    Patient temp = patientListStart.getNextPatient();
 	    patientListStart.setNextPatient(null);
 	    patientListStart = temp;
