@@ -45,13 +45,27 @@ public class PatientDbl {
     }
 
     public void print() {
-        System.out.print(name + ", ");
-        System.out.print(age + ", ");
-        System.out.println(illness);
+        printPatient();
 
         if(nextPatient != null) {
             nextPatient.print();
-        }
+        } else {
+	    System.out.println(" ");
+	    printLast();
+	}
     }
 
+    private void printLast() {
+	printPatient();
+
+	if(lastPatient != null) {
+	    lastPatient.printLast();
+	}
+    }
+
+    private void printPatient() {
+	System.out.print(name + ", ");
+        System.out.print(age + ", ");
+        System.out.println(illness);
+    }
 }

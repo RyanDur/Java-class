@@ -34,6 +34,8 @@ public class DoublyLinkedList {
         PatientDbl patient9 = new PatientDbl("Oded", 9, "Helping");
         PatientDbl patient10 = new PatientDbl("Sokratis", 12, "Java script");
 
+	PatientDbl patient11 = new PatientDbl("Ryan", 34, "To tall");
+
         manager.addPatient(patient1);
         manager.addPatient(patient2);
         manager.addPatient(patient3);
@@ -65,5 +67,7 @@ public class DoublyLinkedList {
         manager.deletePatient(patient1);
         System.out.println(" ");
         manager.printList();
+
+	manager.deletePatient(patient11);
     }
 }
