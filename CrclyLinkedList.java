@@ -1,23 +1,18 @@
 public class CrclyLinkedList {
-    private Node start = null;
     private Node head = null;
 
     public void add(Node node) {
-        if (start == null) {
-            node.setNext(node);
-            start = node;
+        if (head == null) {
+	    node.setNext(node);
             head = node;
-        } else {
-            Node last = last(start, start.getNext());
-            node.setNext(last.getNext());
-            last.setNext(node);
         }
+        node.setNext(head.getNext());
+        head.setNext(node);
     }
 
     public void delete(Node node) {
-        if(start == node) {
-            start = node.getNext();
-            head = start;
+        if(head == node) {
+            head = node.getNext();
         }
         Node last = last(node, node.getNext());
         last.setNext(node.getNext());
@@ -25,31 +20,35 @@ public class CrclyLinkedList {
     }
 
     public void printList() {
-        System.out.println(head.getNode());
-        if(head.getNext() == start) {
-            head = start;
-        } else {
-            head = head.getNext();
-            printList();
-        }
+        printEach(head, head);
     }
 
     public int size() {
+        return sumEach(head, head);
+    }
+
+    private Node last(Node head, Node next) {
+        if(next.getNext() == head) {
+            return next;
+        }
+        return last(head, next.getNext());
+    }
+
+    private void printEach(Node head, Node next) {
+        System.out.println(next.getNode());
+        if(next.getNext() == head) {
+            return;
+        }
+        printEach(head, next.getNext());
+    }
+
+    private int sumEach(Node head, Node next) {
         if(head == null) {
             return 0;
         }
-        if(head.getNext() == start) {
-            head = start;
+        if(next.getNext() == head) {
             return 1;
         }
-        head = head.getNext();
-        return 1 + size();
-    }
-
-    private Node last(Node first, Node next) {
-        if(next.getNext() == first) {
-            return next;
-        }
-        return last(first, next.getNext());
+        return 1 + sumEach(head, next.getNext());
     }
 }
