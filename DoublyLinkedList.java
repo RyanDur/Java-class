@@ -1,73 +1,80 @@
 public class DoublyLinkedList {
-    private PatientDbl patientListStart = null;
-
-    public void addPatient(PatientDbl patient) {
-        if(patientListStart == null) {
-            patientListStart = patient;
-        } else {
-            patientListStart.addPatient(patient);
-        }
-    }
-
-    public void deletePatient(PatientDbl patient) {
-	if(patient == patientListStart) {
-	    patientListStart = patient.getNextPatient();
-	}
-        patient.delete();
-    }
-
-    public void printList() {
-        patientListStart.print();
-    }
-
 
     public static void main(String []args) {
-        DoublyLinkedList manager = new DoublyLinkedList();
-        PatientDbl patient1 = new PatientDbl("John", 33, "Tuberculosis");
-        PatientDbl patient2 = new PatientDbl("Fliss", 21, "Video Game Addiction");
-        PatientDbl patient3 = new PatientDbl("Keimi", 21, "Recursion");
-        PatientDbl patient4 = new PatientDbl("David", 56, "Essixosis");
-        PatientDbl patient5 = new PatientDbl("Joe", 3, "Governmental politics");
-        PatientDbl patient6 = new PatientDbl("Ludovic", 99, "French");
-        PatientDbl patient7 = new PatientDbl("Sergio", 10, "Teaching");
-        PatientDbl patient8 = new PatientDbl("Kieth", 15, "Fell down");
-        PatientDbl patient9 = new PatientDbl("Oded", 9, "Helping");
-        PatientDbl patient10 = new PatientDbl("Sokratis", 12, "Java script");
+        DblyLinkedList manager = new DblyLinkedList();
+        PatientNodeDbl patient1 = new PatientNodeDbl(new Patient("John", 33, "Tuberculosis"));
+        PatientNodeDbl patient2 = new PatientNodeDbl(new Patient("Fliss", 21, "Video Game Addiction"));
+        PatientNodeDbl patient3 = new PatientNodeDbl(new Patient("Keimi", 21, "Recursion"));
+        PatientNodeDbl patient4 = new PatientNodeDbl(new Patient("David", 56, "Essixosis"));
+        PatientNodeDbl patient5 = new PatientNodeDbl(new Patient("Joe", 3, "Governmental politics"));
+        PatientNodeDbl patient6 = new PatientNodeDbl(new Patient("Ludovic", 99, "French"));
+        PatientNodeDbl patient7 = new PatientNodeDbl(new Patient("Sergio", 10, "Teaching"));
+        PatientNodeDbl patient8 = new PatientNodeDbl(new Patient("Kieth", 15, "Fell down"));
+        PatientNodeDbl patient9 = new PatientNodeDbl(new Patient("Oded", 9, "Helping"));
+        PatientNodeDbl patient10 = new PatientNodeDbl(new Patient("Sokratis", 12, "Java script"));
 
-	PatientDbl patient11 = new PatientDbl("Ryan", 34, "To tall");
+        System.out.println(manager.size());
 
-        manager.addPatient(patient1);
-        manager.addPatient(patient2);
-        manager.addPatient(patient3);
-        manager.addPatient(patient4);
-        manager.addPatient(patient5);
-        manager.addPatient(patient6);
-        manager.addPatient(patient7);
-        manager.addPatient(patient8);
-        manager.addPatient(patient9);
-        manager.addPatient(patient10);
+        manager.add(patient1);
+        manager.add(patient2);
+        manager.add(patient3);
+        manager.add(patient4);
+        manager.add(patient5);
+        manager.add(patient6);
+        manager.add(patient7);
+        manager.add(patient8);
+        manager.add(patient9);
+        manager.add(patient10);
 
         manager.printList();
-        manager.deletePatient(patient2);
+        System.out.println(manager.size());
+
+        manager.delete(patient2);
         System.out.println(" ");
         manager.printList();
 
-        manager.deletePatient(patient6);
+        System.out.println(manager.size());
+
+        manager.delete(patient6);
         System.out.println(" ");
         manager.printList();
 
-        manager.deletePatient(patient3);
+        System.out.println(manager.size());
+
+        manager.delete(patient3);
         System.out.println(" ");
         manager.printList();
 
-        manager.deletePatient(patient10);
+        System.out.println(manager.size());
+
+        manager.delete(patient10);
         System.out.println(" ");
         manager.printList();
 
-        manager.deletePatient(patient1);
+        System.out.println(manager.size());
+
+        manager.delete(patient1);
         System.out.println(" ");
         manager.printList();
 
-	manager.deletePatient(patient11);
+        System.out.println(manager.size());
+
+        manager.delete(patient4);
+        System.out.println(" ");
+        manager.printList();
+
+        System.out.println(manager.size());
+
+        manager.delete(patient7);
+        System.out.println(" ");
+        manager.printList();
+
+        System.out.println(manager.size());
+
+        manager.add(new PatientNodeDbl(new Patient("Ryan", 34, "Too tall")));
+        System.out.println(" ");
+        manager.printList();
+        System.out.println(manager.size());
+
     }
 }
