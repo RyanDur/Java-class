@@ -42,6 +42,9 @@ public class SinglyLinkedList {
     }
 
     public int size() {
+	if(helper == null) {
+	    return 0;
+	}
         if(helper.getNext() == null) {
             helper = nodeListStart;
             return 1;

@@ -13,6 +13,8 @@ public class SinglyLinkedLists {
         PatientNode patient9 = new PatientNode(new Patient("Oded", 9, "Helping"));
         PatientNode patient10 = new PatientNode(new Patient("Sokratis", 12, "Java script"));
 
+        System.out.println(manager.size());
+
         manager.add(patient1);
         manager.add(patient2);
         manager.add(patient3);
@@ -25,33 +27,53 @@ public class SinglyLinkedLists {
         manager.add(patient10);
 
         manager.printList();
+        System.out.println(manager.size());
+
         manager.delete(patient2);
         System.out.println(" ");
         manager.printList();
+
+        System.out.println(manager.size());
 
         manager.delete(patient6);
         System.out.println(" ");
         manager.printList();
 
+        System.out.println(manager.size());
+
         manager.delete(patient3);
         System.out.println(" ");
         manager.printList();
+
+        System.out.println(manager.size());
 
         manager.delete(patient10);
         System.out.println(" ");
         manager.printList();
 
+        System.out.println(manager.size());
+
         manager.delete(patient1);
         System.out.println(" ");
         manager.printList();
+
+        System.out.println(manager.size());
 
         manager.delete(patient4);
         System.out.println(" ");
         manager.printList();
 
-        manager.add(new PatientNode(new Patient("Ryan", 34, "Too tall")));
+        System.out.println(manager.size());
+
         manager.delete(patient7);
         System.out.println(" ");
         manager.printList();
+
+        System.out.println(manager.size());
+
+        manager.add(new PatientNode(new Patient("Ryan", 34, "Too tall")));
+        System.out.println(" ");
+        manager.printList();
+        System.out.println(manager.size());
     }
 }
