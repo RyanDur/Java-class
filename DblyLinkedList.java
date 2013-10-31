@@ -15,9 +15,9 @@ public class DblyLinkedList {
     }
 
     public void delete(NodeDbl node) {
-	if(head == node) {
-	    head = head.getNext();
-	}
+        if(head == node) {
+            head = head.getNext();
+        }
         if(node.getNext() != null) {
             node.getNext().setLast(node.getLast());
         }
@@ -31,7 +31,8 @@ public class DblyLinkedList {
     public void printList() {
         System.out.println(head.getNode());
         if(head.getNext() == null) {
-            resetHead();
+	    System.out.println();
+            printLast();
         } else {
             head = head.getNext();
             printList();
@@ -50,10 +51,19 @@ public class DblyLinkedList {
         return 1 + size();
     }
 
-    private void resetHead() {
-	if(head.getLast() != null) {
+    private void printLast() {
+	System.out.println(head.getNode());
+
+        if(head.getLast() != null) {
 	    head = head.getLast();
-	    resetHead();
-	}
+            printLast();
+        }
+    }
+
+    private void resetHead() {
+        if(head.getLast() != null) {
+            head = head.getLast();
+            resetHead();
+        }
     }
 }
