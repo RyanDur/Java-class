@@ -1,55 +1,55 @@
 public class SinglyLinkedList {
-    private Node nodeListStart = null;
-    private Node helper = null;
+    protected Node start = null;
+    protected Node head = null;
 
     public void add(Node node) {
-        if (nodeListStart == null) {
-            nodeListStart = node;
-            helper = node;
-        } else if(helper.getNext() == null) {
-            helper.setNext(node);
-            helper = nodeListStart;
+        if (start == null) {
+            start = node;
+            head = node;
+        } else if(head.getNext() == null) {
+            head.setNext(node);
+            head = start;
         } else {
-            helper = helper.getNext();
+            head = head.getNext();
             add(node);
         }
     }
 
     public void delete(Node node) {
         Node temp = node.getNext();
-        if(nodeListStart == node) {
+        if(start == node) {
             node.setNext(null);
-            nodeListStart = temp;
-            helper = nodeListStart;
-        } else if(helper.getNext() == node) {
+            start = temp;
+            head = start;
+        } else if(head.getNext() == node) {
             node.setNext(null);
-            helper.setNext(temp);
-            helper = nodeListStart;
+            head.setNext(temp);
+            head = start;
         } else {
-            helper = helper.getNext();
+            head = head.getNext();
             delete(node);
         }
     }
 
     public void printList() {
-        System.out.println(helper.getNode());
-        if(helper.getNext() == null) {
-            helper = nodeListStart;
+        System.out.println(head.getValue());
+        if(head.getNext() == null) {
+            head = start;
             return;
         }
-        helper = helper.getNext();
+        head = head.getNext();
         printList();
     }
 
     public int size() {
-        if(helper == null) {
+        if(head == null) {
             return 0;
         }
-        if(helper.getNext() == null) {
-            helper = nodeListStart;
+        if(head.getNext() == null) {
+            head = start;
             return 1;
         }
-        helper = helper.getNext();
+        head = head.getNext();
         return 1 + size();
     }
 

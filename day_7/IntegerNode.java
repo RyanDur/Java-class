@@ -4,8 +4,8 @@ public class IntegerNode extends Node {
 	super(num);
     }
 
-    public Integer getNode() {
-	return (Integer) super.getNode();
+    public Integer getValue() {
+	return (Integer) super.getValue();
     }
 
     public Node getNext() {
@@ -14,5 +14,9 @@ public class IntegerNode extends Node {
 
     public void setNext(IntegerNode node) {
 	super.setNext(node);
+    }
+
+    public boolean compare(Node node) {
+	return getValue() > (Integer) node.getValue();
     }
 }

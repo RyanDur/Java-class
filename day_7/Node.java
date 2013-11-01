@@ -1,14 +1,14 @@
 public class Node {
-    Object node;
+    Object value;
     Node nextNode;
 
-    public Node(Object node) {
-	this.node = node;
+    public Node(Object value) {
+	this.value = value;
 	nextNode = null;
     }
 
-    public Object getNode() {
-	return node;
+    public Object getValue() {
+	return value;
     }
 
     public Node getNext() {
@@ -17,5 +17,9 @@ public class Node {
 
     public void setNext(Node node) {
 	this.nextNode = node;
+    }
+
+    public boolean compare(Node node) {
+	return value == node.getValue();
     }
 }
