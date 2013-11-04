@@ -11,6 +11,10 @@ public class Node {
 	return value;
     }
 
+    public void setValue(Object value) {
+	this.value = value;
+    }
+
     public Node getNext() {
 	return nextNode;
     }

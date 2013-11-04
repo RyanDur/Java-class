@@ -17,15 +17,12 @@ public class SortList extends DoublyLinkedList {
     }
 
     public NodeDbl getHead() {
-	return head;
+        return head;
     }
 
-    public void insertBefore(NodeDbl before, NodeDbl toInsert) {
-        if(before.getNext() != null) {
-            toInsert.setNext(before.getNext());
-            before.getNext().setLast(toInsert);
-        }
-        toInsert.setLast(before);
-        before.setNext(toInsert);
+    public void swap(NodeDbl first, NodeDbl second) {
+	Object temp = first.getValue();
+	first.setValue(second.getValue());
+	second.setValue(temp);
     }
 }

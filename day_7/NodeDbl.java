@@ -25,4 +25,8 @@ public class NodeDbl extends Node {
     public Object getValue() {
         return super.getValue();
     }
+
+    public void setValue(Object value) {
+	super.setValue(value);
+    }
 }
