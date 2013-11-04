@@ -1,5 +1,5 @@
 public class DoublyLinkedList {
-    private NodeDbl head = null;
+    protected NodeDbl head = null;
 
     public void add(NodeDbl node) {
         if (head == null) {
@@ -29,7 +29,7 @@ public class DoublyLinkedList {
     }
 
     public void printList() {
-        System.out.println(head.getNode());
+        System.out.println(head.getValue());
         if(head.getNext() == null) {
 	    System.out.println();
             printLast();
@@ -52,7 +52,7 @@ public class DoublyLinkedList {
     }
 
     private void printLast() {
-	System.out.println(head.getNode());
+	System.out.println(head.getValue());
 
         if(head.getLast() != null) {
 	    head = head.getLast();

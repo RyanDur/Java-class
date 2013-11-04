@@ -22,7 +22,7 @@ public class NodeDbl extends Node {
 	lastNode = node;
     }
 
-    public Object getNode() {
-        return super.getNode();
+    public Object getValue() {
+        return super.getValue();
     }
 }

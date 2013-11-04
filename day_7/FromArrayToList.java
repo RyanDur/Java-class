@@ -5,6 +5,16 @@ public class FromArrayToList {
 
 	SinglyLinkedList list = ListUtilities.toList(foo);
 
-	list.printList();
+	//	list.printList();
+
+	SortList bar = new SortList();
+	for(int i = 0; i < foo.length; i++) {
+	    bar.add(new NodeDbl(foo[i]));
+	}
+
+	DoublyLinkedList dblList = ListUtilities.bubbleSort(bar);
+
+	System.out.println(" ");
+	dblList.printList();
     }
 }
