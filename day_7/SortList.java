@@ -17,12 +17,24 @@ public class SortList extends DoublyLinkedList {
     }
 
     public NodeDbl getHead() {
-        return head;
+        return super.getHead();
     }
 
     public void swap(NodeDbl first, NodeDbl second) {
 	Object temp = first.getValue();
 	first.setValue(second.getValue());
 	second.setValue(temp);
+    }
+
+    public void addAll(SortList list) {
+	copy(list.getHead());
+    }
+
+    private void copy(NodeDbl head) {
+	if(head == null) {
+	    return;
+	}
+	add(new NodeDbl(head.getValue()));
+	copy(head.getNext());
     }
 }

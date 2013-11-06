@@ -46,4 +46,37 @@ public class ListUtilities {
         }
         return list;
     }
+
+    public static SortList quicksort(SortList list) {
+        if(list.size() <= 1) {
+            return list;
+        }
+
+        NodeDbl head = list.getHead();
+        int pivot = (Integer) head.getValue();
+
+        SortList less = new SortList();
+        SortList pivotList = new SortList();
+        SortList more = new SortList();
+
+        while(head != null) {
+            int val = (Integer) head.getValue();
+            if(val < pivot) {
+                less.add(new NodeDbl(val));
+            } else if(val > pivot) {
+                more.add(new NodeDbl(val));
+            } else {
+                pivotList.add(new NodeDbl(val));
+            }
+            head = head.getNext();
+        }
+
+        less = quicksort(less);
+        more = quicksort(more);
+
+        less.addAll(pivotList);
+        less.addAll(more);
+
+        return less;
+    }
 }

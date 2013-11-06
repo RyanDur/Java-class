@@ -1,16 +1,11 @@
 public class DoublyLinkedList {
-    protected NodeDbl head = null;
+    private NodeDbl head = null;
 
     public void add(NodeDbl node) {
         if (head == null) {
             head = node;
-        } else if(head.getNext() == null) {
-            head.setNext(node);
-            node.setLast(head);
-            resetHead();
         } else {
-            head = head.getNext();
-            add(node);
+            addNode(node, head);
         }
     }
 
@@ -29,9 +24,9 @@ public class DoublyLinkedList {
     }
 
     public void printList() {
-        System.out.println(head.getValue());
+	System.out.println(head.getValue());
         if(head.getNext() == null) {
-	    System.out.println();
+            System.out.println();
             printLast();
         } else {
             head = head.getNext();
@@ -40,31 +35,39 @@ public class DoublyLinkedList {
     }
 
     public int size() {
-        if(head == null) {
-            return 0;
-        }
+        return countNodes(head);
+    }
+
+    public NodeDbl getHead() {
+        return head;
+    }
+
+    private void addNode(NodeDbl node, NodeDbl head) {
         if(head.getNext() == null) {
-            resetHead();
-            return 1;
+            head.setNext(node);
+            node.setLast(head);
+            return;
         }
-        head = head.getNext();
-        return 1 + size();
+        addNode(node, head.getNext());
     }
 
     private void printLast() {
-	System.out.println(head.getValue());
+        System.out.println(head.getValue());
 
         if(head.getLast() != null) {
-	    head = head.getLast();
+            head = head.getLast();
             printLast();
         }
     }
 
-    private void resetHead() {
-        if(head.getLast() != null) {
-            head = head.getLast();
-            resetHead();
+    private int countNodes(NodeDbl node) {
+        if(node == null) {
+            return 0;
         }
+        if(node.getNext() == null) {
+            return 1;
+        }
+        return 1 + countNodes(node.getNext());
     }
 
     public static void main(String []args) {
