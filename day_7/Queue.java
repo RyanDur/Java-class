@@ -5,13 +5,12 @@ public class Queue extends SinglyLinkedList {
     }
 
     public Node retrieve() {
+	Node head = getHead();
         if(head == null) {
             return null;
         } else {
-            Node temp = head;
-            head = head.getNext();
-            temp.setNext(null);
-            return temp;
+	    delete(head);
+            return head;
         }
     }
 

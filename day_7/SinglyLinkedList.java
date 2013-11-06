@@ -1,5 +1,5 @@
 public class SinglyLinkedList {
-    protected Node head = null;
+    private Node head = null;
 
     public void add(Node node) {
         if (head == null) {
@@ -36,6 +36,10 @@ public class SinglyLinkedList {
 
     public int size() {
         return countNodes(head);
+    }
+
+    public Node getHead() {
+	return head;
     }
 
     private void printEach(Node node) {
