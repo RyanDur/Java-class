@@ -1,26 +1,36 @@
 public class Person extends Node {
+    private int age;
 
-    public Person(String name) {
+    public Person(String name, int age) {
 	super(name);
+	this.age = age;
     }
 
-    public String getValue() {
+    public String getName() {
 	return (String) super.getValue();
     }
 
-    public void setValue(Object value) {
-	super.setValue(value);
+    public void setName(String name) {
+	super.setValue(name);
     }
 
-    public Node getNext() {
-	return super.getNext();
+    public void setAge(int age) {
+	this.age = age;
     }
 
-    public void setNext(Node node) {
+    public int getAge() {
+	return age;
+    }
+
+    public Person getNext() {
+	return (Person) super.getNext();
+    }
+
+    public void setNext(Person node) {
 	super.setNext(node);
     }
 
     public String toString() {
-	return getValue();
+	return "Name: " + getName() + ", Age: " + getAge();
     }
 }

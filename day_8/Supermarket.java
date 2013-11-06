@@ -14,11 +14,11 @@ public class Supermarket {
 
     public static void main(String []args) {
         Supermarket sm = new Supermarket();
-        Person p1 = new Person("Fliss");
-        Person p2 = new Person("Keimi");
-        Person p3 = new Person("David");
-        Person p4 = new Person("Joe");
-        Person p5 = new Person("Olly");
+        Person p1 = new Person("Fliss", 14);
+        Person p2 = new Person("Keimi", 21);
+        Person p3 = new Person("David", 90);
+        Person p4 = new Person("Joe", 64);
+        Person p5 = new Person("Olly", 65);
 
         sm.addPerson(p1);
         sm.addPerson(p2);
