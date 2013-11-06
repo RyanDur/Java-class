@@ -14,7 +14,7 @@ public class SinglyLinkedList {
     }
 
     public void delete(Node node) {
-        if(head == null) {
+        if(head == null || node == null) {
             return;
         }
         if(head == node) {
