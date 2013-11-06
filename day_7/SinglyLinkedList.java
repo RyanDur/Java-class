@@ -1,61 +1,59 @@
 public class SinglyLinkedList {
-    protected Node start = null;
     protected Node head = null;
 
     public void add(Node node) {
-        if (start == null) {
-            start = node;
+        if (head == null) {
             head = node;
-        } else if(head.getNext() == null) {
-            head.setNext(node);
-            head = start;
         } else {
-            head = head.getNext();
-            add(node);
+	    Node temp = head;
+	    while(temp.getNext() != null) {
+		temp = temp.getNext();
+	    }
+	    temp.setNext(node);
         }
     }
 
     public void delete(Node node) {
-        if(start == null) {
+        if(head == null) {
             return;
         }
-	Node temp = node.getNext();
-        if(start == node) {
+        if(head == node) {
+	    head = head.getNext();
             node.setNext(null);
-            start = temp;
-            head = start;
-        }else if(head.getNext() == null) {
-
-        } else if(head.getNext() == node) {
-            node.setNext(null);
-            head.setNext(temp);
-            head = start;
-        } else {
-            head = head.getNext();
-            delete(node);
-        }
+        }else {
+	    Node temp = head;
+	    while(temp.getNext() != null && temp.getNext() != node) {
+		temp = temp.getNext();
+	    }
+	    temp.setNext(node.getNext());
+	    node.setNext(null);
+	}
     }
 
     public void printList() {
-        System.out.println(head.getValue());
-        if(head.getNext() == null) {
-            head = start;
-            return;
-        }
-        head = head.getNext();
-        printList();
+	printEach(head);
     }
 
     public int size() {
-        if(head == null) {
+        return countNodes(head);
+    }
+
+    private void printEach(Node node) {
+	System.out.println(node.getValue());
+        if(node.getNext() == null) {
+            return;
+        }
+        printEach(node.getNext());
+    }
+
+    private int countNodes(Node node) {
+	if(node == null) {
             return 0;
         }
-        if(head.getNext() == null) {
-            head = start;
+        if(node.getNext() == null) {
             return 1;
         }
-        head = head.getNext();
-        return 1 + size();
+	return 1 + countNodes(node.getNext());
     }
 
     public static void main(String []args) {
