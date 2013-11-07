@@ -3,6 +3,7 @@ public class MyMap {
     public static void main(String []args) {
         SimpleMap sm = new SMap();
         sm.put(1, "Fliss");
+        sm.put(1, "Fliss");
         sm.put(26, "Keimi");
         sm.put(2, "Joe");
         sm.put(45, "David");

@@ -1,13 +1,15 @@
 public class SMap extends SinglyLinkedList implements SimpleMap {
 
     public void put(int key, String name) {
-        super.add(new Node(new KeyValuePair(key,name)));
+        if(retrieve(key) == null) {
+            super.add(new Node(new KeyValuePair(key,name)));
+        }
     }
 
     public String get(int key) {
         Node node = retrieve(key);
         if(node == null) {
-            return "Does not Exist";
+            return null;
         }
         KeyValuePair kvp = (KeyValuePair) node.getValue();
         return kvp.getName();
@@ -15,9 +17,9 @@ public class SMap extends SinglyLinkedList implements SimpleMap {
 
     public void remove(int key) {
         Node node = retrieve(key);
-	if(node != null) {
-	    super.delete(node);
-	}
+        if(node != null) {
+            super.delete(node);
+        }
     }
 
     public boolean isEmpty() {
@@ -26,7 +28,10 @@ public class SMap extends SinglyLinkedList implements SimpleMap {
 
     private Node retrieve(int key) {
         Node head = getHead();
-        KeyValuePair kvp = (KeyValuePair) head.getValue();
+	KeyValuePair kvp = null;
+        if(head != null) {
+            kvp = (KeyValuePair) head.getValue();
+        }
         while(head != null && kvp.getKey() != key) {
             head = head.getNext();
             if(head != null) {
