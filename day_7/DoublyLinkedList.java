@@ -24,14 +24,16 @@ public class DoublyLinkedList {
     }
 
     public void printList() {
-	System.out.println(head.getValue());
+        System.out.println(head.getValue());
         if(head.getNext() == null) {
             System.out.println();
-            printLast();
-        } else {
-            head = head.getNext();
-            printList();
+            System.out.println(head.getValue());
+            return;
         }
+        head = head.getNext();
+        printList();
+        head = head.getLast();
+        System.out.println(head.getValue());
     }
 
     public int size() {
@@ -49,15 +51,6 @@ public class DoublyLinkedList {
             return;
         }
         addNode(node, head.getNext());
-    }
-
-    private void printLast() {
-        System.out.println(head.getValue());
-
-        if(head.getLast() != null) {
-            head = head.getLast();
-            printLast();
-        }
     }
 
     private int countNodes(NodeDbl node) {
