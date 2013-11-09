@@ -10,11 +10,16 @@ public class IntegerBinaryTree {
     }
 
     public int getMax() {
-        return getLeftMostValue(head);
+        return getRightMostValue(head);
     }
 
     public int getMin() {
-        return getRightMostValue(head);
+        return getLeftMostValue(head);
+
+    }
+
+    public String toString() {
+        return head.toString();
     }
 
     private int getLeftMostValue(IntegerTreeNode node) {
@@ -32,7 +37,7 @@ public class IntegerBinaryTree {
     }
 
     private void addNode(int num, IntegerTreeNode node) {
-        if(node.getValue() < num) {
+        if(node.getValue() > num) {
             if(node.getLeft() == null) {
                 node.setLeft(new IntegerTreeNode(num));
             } else {
@@ -57,5 +62,7 @@ public class IntegerBinaryTree {
 
         System.out.println("Min: " + ibt.getMin());
         System.out.println("Max: " + ibt.getMax());
+
+        System.out.println(ibt);
     }
 }
