@@ -18,8 +18,21 @@ public class IntegerBinaryTree {
 
     }
 
+    public int depth() {
+	return treeDepth(head);
+    }
+
     public String toString() {
         return head.toString();
+    }
+
+    private int treeDepth(IntegerTreeNode node) {
+	if(node == null) {
+	    return 0;
+	}
+	int left = treeDepth(node.getLeft());
+	int right = treeDepth(node.getRight());
+	return left > right ? left + 1 : right + 1;
     }
 
     private int getLeftMostValue(IntegerTreeNode node) {
@@ -56,6 +69,8 @@ public class IntegerBinaryTree {
         int[] nums = {7,3,9,1,3,7,2,4,2,7};
         IntegerBinaryTree ibt = new IntegerBinaryTree();
 
+	System.out.println("Tree Depth: " + ibt.depth());
+
         for(int i = 0; i< nums.length; i++) {
             ibt.add(nums[i]);
         }
@@ -64,5 +79,7 @@ public class IntegerBinaryTree {
         System.out.println("Max: " + ibt.getMax());
 
         System.out.println(ibt);
+
+	System.out.println("Tree Depth: " + ibt.depth());
     }
 }
