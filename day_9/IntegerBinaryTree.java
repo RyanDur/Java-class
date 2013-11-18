@@ -1,14 +1,12 @@
 public class IntegerBinaryTree {
-    private IntegerTreeNode head;
+    private IntegerTreeNode root;
 
     public void add(int num) {
-        if(head == null) {
-            head = new IntegerTreeNode(num);
+        if(root == null) {
+            root = new IntegerTreeNode(num);
         } else {
-            addNode(num, head);
-            if(unbalanced(head)) {
-                rebalance(head);
-            }
+            addNode(num, root);
+            rebalance(root);
         }
     }
 
@@ -16,50 +14,49 @@ public class IntegerBinaryTree {
         if(tree == null) {
             return;
         }
-        if(tree.getLeft() == null && tree.getRight() == null) {
-            return;
-        }
         rebalance(tree.getLeft());
         rebalance(tree.getRight());
-        rotate(tree);
+
+        if(unbalanced(tree)) {
+            root = rotate(tree);
+        } else {
+            root = tree;
+        }
     }
 
-    private void rotate(IntegerTreeNode tree) {
+    private IntegerTreeNode rotate(IntegerTreeNode tree) {
+        if(tree == null) {
+            return null;
+        }
         IntegerTreeNode head = tree;
-        if(treeDepth(tree.getLeft()) > treeDepth(tree.getRight())) {
+        int leftTree = treeDepth(tree.getLeft());
+        int rightTree = treeDepth(tree.getRight());
+        if(leftTree > rightTree) {
             tree = tree.getLeft();
-
-            tree.setParent(head.getParent());
-            head.setParent(tree);
-            if(tree.getRight() != null) {
-                tree.getRight().setParent(head);
-            }
-
+            head.setLeft(tree.getRight());
             tree.setRight(head);
         } else {
             tree = tree.getRight();
-
-            tree.setParent(head.getParent());
-            head.setParent(tree);
-            if(tree.getLeft() != null) {
-                tree.getLeft().setParent(head);
-            }
-
+            head.setRight(tree.getLeft());
             tree.setLeft(head);
         }
+        return tree;
     }
 
     private boolean unbalanced(IntegerTreeNode node) {
+        if(node == null) {
+            return false;
+        }
         int left = treeDepth(node.getLeft());
         int right = treeDepth(node.getRight());
         return (Math.abs(left - right) > 1);
     }
 
     public Integer getMin() {
-        if(head == null) {
+        if(root == null) {
             return null;
         }
-        IntegerTreeNode node = head;
+        IntegerTreeNode node = root;
         while(node.getLeft() != null) {
             node = node.getLeft();
         }
@@ -67,10 +64,10 @@ public class IntegerBinaryTree {
     }
 
     public Integer getMax() {
-        if(head == null) {
+        if(root == null) {
             return null;
         }
-        return getMax(head).getValue();
+        return getMax(root).getValue();
     }
 
     private IntegerTreeNode getMax(IntegerTreeNode node) {
@@ -84,19 +81,18 @@ public class IntegerBinaryTree {
     }
 
     public int depth() {
-        return treeDepth(head);
+        return treeDepth(root);
     }
 
     public String toString() {
-        if(head == null) {
+        if(root == null) {
             return "Empty";
         }
-        return head.toString();
+        return root.toString();
     }
 
     private void addNode(int num, IntegerTreeNode node) {
         IntegerTreeNode newNode = new IntegerTreeNode(num);
-        newNode.setParent(node);
 
         if(node.getValue() > num) {
             if(node.getLeft() == null) {
@@ -117,13 +113,10 @@ public class IntegerBinaryTree {
     private int treeDepth(IntegerTreeNode node) {
         if(node == null) {
             return 0;
-        } else if(node.getLeft() == null && node.getRight() == null) {
-            return 0;
-        } else {
-            int left = treeDepth(node.getLeft());
-            int right = treeDepth(node.getRight());
-            return left > right ? left + 1 : right + 1;
         }
+        int left = treeDepth(node.getLeft());
+        int right = treeDepth(node.getRight());
+        return left > right ? left + 1 : right + 1;
     }
 
     public static void main(String []args) {
@@ -136,105 +129,15 @@ public class IntegerBinaryTree {
         System.out.println(ibtOne);
         System.out.println("Tree Depth: " + ibtOne.depth());
 
-        ibtOne.add(1);
+        for(int i = 1; i < 9; i++) {
+            System.out.println();
+            System.out.println("Add " + i);
+            ibtOne.add(i);
+            System.out.println("Min: " + ibtOne.getMin());
+            System.out.println("Max: " + ibtOne.getMax());
+            System.out.println(ibtOne);
+            System.out.println("Tree Depth: " + ibtOne.depth());
+        }
 
-        System.out.println();
-        System.out.println("Add 1");
-        System.out.println("Min: " + ibtOne.getMin());
-        System.out.println("Max: " + ibtOne.getMax());
-        System.out.println(ibtOne);
-        System.out.println("Tree Depth: " + ibtOne.depth());
-
-        // ibtOne.remove(1);
-
-        // System.out.println();
-        // System.out.println("Remove 1");
-        // System.out.println("Min: " + ibtOne.getMin());
-        // System.out.println("Max: " + ibtOne.getMax());
-        // System.out.println(ibtOne);
-        // System.out.println("Tree Depth: " + ibtOne.depth());
-
-        ibtOne.add(2);
-        ibtOne.add(3);
-
-        System.out.println();
-        System.out.println("Add 2 3");
-        System.out.println("Min: " + ibtOne.getMin());
-        System.out.println("Max: " + ibtOne.getMax());
-        System.out.println(ibtOne);
-        System.out.println("Tree Depth: " + ibtOne.depth());
-
-        // ibtOne.remove(2);
-
-        // System.out.println();
-        // System.out.println("Remove 2");
-        // System.out.println("Min: " + ibtOne.getMin());
-        // System.out.println("Max: " + ibtOne.getMax());
-        // System.out.println(ibtOne);
-        // System.out.println("Tree Depth: " + ibtOne.depth());
-
-        // ibtOne.remove(3);
-
-        // System.out.println();
-        // System.out.println("Remove 3");
-        // System.out.println("Min: " + ibtOne.getMin());
-        // System.out.println("Max: " + ibtOne.getMax());
-        // System.out.println(ibtOne);
-        // System.out.println("Tree Depth: " + ibtOne.depth());
-
-        ibtOne.add(4);
-        ibtOne.add(5);
-        ibtOne.add(3);
-
-        System.out.println();
-        System.out.println("Add 4 5 3");
-        System.out.println("Min: " + ibtOne.getMin());
-        System.out.println("Max: " + ibtOne.getMax());
-        System.out.println(ibtOne);
-        System.out.println("Tree Depth: " + ibtOne.depth());
-
-        // ibtOne.remove(4);
-
-        // System.out.println();
-        // System.out.println("Remove 4");
-        // System.out.println("Min: " + ibtOne.getMin());
-        // System.out.println("Max: " + ibtOne.getMax());
-        // System.out.println(ibtOne);
-        // System.out.println("Tree Depth: " + ibtOne.depth());
-
-        // System.out.println("Tree Depth: " + ibt.depth());
-        // for(int i = 0; i< nums.length; i++) {
-        //     ibt.add(nums[i]);
-        // }
-
-        // for(int i = 0; i< nums.length; i++) {
-        //     System.out.println(ibt.contains(nums[i]) + ": " + nums[i]);
-        // }
-        // System.out.println("Min: " + ibt.getMin());
-        // System.out.println("Max: " + ibt.getMax());
-        // System.out.println(ibt);
-        // System.out.println("Tree Depth: " + ibt.depth());
-
-        // ibt.remove(9);
-        // ibt.remove(33);
-        // ibt.remove(1);
-
-        // for(int i = 0; i< nums.length; i++) {
-        //     System.out.println(ibt.contains(nums[i]) + ": " + nums[i]);
-        // }
-        // System.out.println("Min: " + ibt.getMin());
-        // System.out.println("Max: " + ibt.getMax());
-        // System.out.println(ibt);
-        // System.out.println("Tree Depth: " + ibt.depth());
-
-        // ibt.remove(5);
-
-        // for(int i = 0; i< nums.length; i++) {
-        //     System.out.println(ibt.contains(nums[i]) + ": " + nums[i]);
-        // }
-        // System.out.println("Min: " + ibt.getMin());
-        // System.out.println("Max: " + ibt.getMax());
-        // System.out.println(ibt);
-        // System.out.println("Tree Depth: " + ibt.depth());
     }
 }

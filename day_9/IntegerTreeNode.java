@@ -1,8 +1,7 @@
 public class IntegerTreeNode {
-    int value;
+    Integer value;
     IntegerTreeNode left;
     IntegerTreeNode right;
-    IntegerTreeNode parent;
 
     public IntegerTreeNode(int value) {
         this.value = value;
@@ -12,7 +11,7 @@ public class IntegerTreeNode {
         this.value = value;
     }
 
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
 
@@ -30,14 +29,6 @@ public class IntegerTreeNode {
 
     public IntegerTreeNode getRight() {
         return right;
-    }
-
-    public void setParent(IntegerTreeNode node) {
-	parent = node;
-    }
-
-    public IntegerTreeNode getParent() {
-	return parent;
     }
 
     public String toString() {
