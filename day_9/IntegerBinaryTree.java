@@ -6,22 +6,21 @@ public class IntegerBinaryTree {
             root = new IntegerTreeNode(num);
         } else {
             addNode(num, root);
-            rebalance(root);
+            root = rebalance(root);
         }
     }
 
-    private void rebalance(IntegerTreeNode tree) {
+    private IntegerTreeNode rebalance(IntegerTreeNode tree) {
         if(tree == null) {
-            return;
+            return null;
         }
-        rebalance(tree.getLeft());
-        rebalance(tree.getRight());
+        tree.setLeft(rebalance(tree.getLeft()));
+        tree.setRight(rebalance(tree.getRight()));
 
         if(unbalanced(tree)) {
-            root = rotate(tree);
-        } else {
-            root = tree;
+            tree = rotate(tree);
         }
+	return tree;
     }
 
     private IntegerTreeNode rotate(IntegerTreeNode tree) {
@@ -40,6 +39,7 @@ public class IntegerBinaryTree {
             head.setRight(tree.getLeft());
             tree.setLeft(head);
         }
+
         return tree;
     }
 
@@ -129,7 +129,7 @@ public class IntegerBinaryTree {
         System.out.println(ibtOne);
         System.out.println("Tree Depth: " + ibtOne.depth());
 
-        for(int i = 1; i < 9; i++) {
+        for(int i = 1; i < 17; i++) {
             System.out.println();
             System.out.println("Add " + i);
             ibtOne.add(i);
