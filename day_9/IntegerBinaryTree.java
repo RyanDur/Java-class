@@ -44,7 +44,7 @@ public class IntegerBinaryTree {
     }
 
     public boolean contains(int num) {
-        return contains(num, root);
+        return get(num, root) != null;
     }
 
     public Integer getMin() {
@@ -106,20 +106,6 @@ public class IntegerBinaryTree {
             result = true;
         }
         return result;
-    }
-
-    private boolean contains(int num, IntegerTreeNode node) {
-        if(node == null) {
-            return false;
-        }
-        if(node.getValue() == num) {
-            return true;
-        }
-        if(node.getValue() < num) {
-            return contains(num, node.getRight());
-        } else {
-            return contains(num, node.getLeft());
-        }
     }
 
     private boolean isLeaf(IntegerTreeNode tree) {
