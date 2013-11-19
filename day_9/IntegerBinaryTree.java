@@ -10,6 +10,211 @@ public class IntegerBinaryTree {
         }
     }
 
+    public void delete(int num) {
+        if(root == null) {
+            return;
+        }
+        if(root.getValue() == num && isLeaf(root)) {
+            root = null;
+            return;
+        }
+        if(contains(num)) {
+            IntegerTreeNode child;
+            IntegerTreeNode parent;
+            if(root.getValue() == num) {
+                if(root.getLeft() != null) {
+                    swap(root, root.getLeft());
+                    child = root.getLeft();
+                } else {
+                    swap(root, root.getRight());
+                    child = root.getRight();
+                }
+                parent = root;
+            } else {
+                child = get(num, root);
+                parent = getParent(child, root);
+            }
+            if(parent.getLeft() == child) {
+                deleteLeft(child, parent);
+            } else {
+                deleteRight(child, parent);
+            }
+        }
+        root = rebalance(root);;
+    }
+
+    public boolean contains(int num) {
+        return contains(num, root);
+    }
+
+    public Integer getMin() {
+        if(root == null) {
+            return null;
+        }
+        IntegerTreeNode node = root;
+        while(node.getLeft() != null) {
+            node = node.getLeft();
+        }
+        return node.getValue();
+    }
+
+    public Integer getMax() {
+        if(root == null) {
+            return null;
+        }
+        IntegerTreeNode node = root;
+        while(node.getRight() != null) {
+            node = node.getRight();
+        }
+        return node.getValue();
+    }
+
+    public int depth() {
+        return treeDepth(root);
+    }
+
+    public String toString() {
+        if(root == null) {
+            return "Empty";
+        }
+        return root.toString();
+    }
+
+    private void addNode(int num, IntegerTreeNode node) {
+        if(node.getValue() > num) {
+            if(node.getLeft() == null) {
+                node.setLeft(new IntegerTreeNode(num));
+            } else {
+                addNode(num, node.getLeft());
+            }
+        } else {
+            if(node.getRight() == null) {
+                node.setRight(new IntegerTreeNode(num));
+            } else {
+                addNode(num, node.getRight());
+            }
+        }
+    }
+
+    private boolean deleteLeaf(IntegerTreeNode child, IntegerTreeNode parent) {
+        boolean result = false;
+        if(parent.getLeft() == child) {
+            parent.setLeft(null);
+            result = true;
+        } else if(parent.getRight() == child) {
+            parent.setRight(null);
+            result = true;
+        }
+        return result;
+    }
+
+    private boolean contains(int num, IntegerTreeNode node) {
+        if(node == null) {
+            return false;
+        }
+        if(node.getValue() == num) {
+            return true;
+        }
+        if(node.getValue() < num) {
+            return contains(num, node.getRight());
+        } else {
+            return contains(num, node.getLeft());
+        }
+    }
+
+    private boolean isLeaf(IntegerTreeNode tree) {
+        return tree.getLeft() == null && tree.getRight() == null;
+    }
+
+    private boolean deleteLeft(IntegerTreeNode child, IntegerTreeNode parent) {
+        if(child == null || parent == null) {
+            return false;
+        }
+        if(isLeaf(child)) {
+            if(deleteLeaf(child, parent)) {
+                return true;
+            }
+        } else if(child.getRight() != null) {
+            parent = child;
+            while(child.getRight() != null) {
+                child = child.getRight();
+            }
+            swap(child, parent);
+            while(parent.getRight() != child) {
+                parent = parent.getRight();
+            }
+            return deleteLeft(child, parent);
+        }
+        swap(child, child.getLeft());
+        return deleteLeft(child.getLeft(), parent.getLeft());
+    }
+
+    private boolean deleteRight(IntegerTreeNode child, IntegerTreeNode parent) {
+        if(isLeaf(child)) {
+            if(deleteLeaf(child, parent)) {
+                return true;
+            }
+        } else if(child.getLeft() != null) {
+            parent = child;
+            while(child.getLeft() != null) {
+                child = child.getLeft();
+            }
+            swap(child, parent);
+            while(parent.getLeft() != child) {
+                parent = parent.getLeft();
+            }
+            return deleteLeft(child, parent);
+        }
+        swap(child, child.getRight());
+        return deleteLeft(child.getRight(), parent.getRight());
+    }
+
+    private IntegerTreeNode get(int num, IntegerTreeNode tree) {
+        if(tree == null) {
+            return null;
+        }
+        if(tree.getValue() == num) {
+            return tree;
+        }
+        if(tree.getValue() < num) {
+            return get(num, tree.getRight());
+        } else {
+            return get(num, tree.getLeft());
+        }
+    }
+
+    private void swap(IntegerTreeNode nodeA, IntegerTreeNode nodeB) {
+        int temp = nodeA.getValue();
+        nodeA.setValue(nodeB.getValue());
+        nodeB.setValue(temp);
+    }
+
+    private IntegerTreeNode getParent(IntegerTreeNode child, IntegerTreeNode parent) {
+        if(child == null || parent == null) {
+            return null;
+        }
+        if(parent.getLeft() == child) {
+            return parent;
+        }
+        if(parent.getRight() == child) {
+            return parent;
+        }
+        if(parent.getValue() < child.getValue()) {
+            return getParent(child, parent.getRight());
+        } else {
+            return getParent(child, parent.getLeft());
+        }
+    }
+
+    private int treeDepth(IntegerTreeNode node) {
+        if(node == null) {
+            return 0;
+        }
+        int left = treeDepth(node.getLeft());
+        int right = treeDepth(node.getRight());
+        return left > right ? left + 1 : right + 1;
+    }
+
     private IntegerTreeNode rebalance(IntegerTreeNode tree) {
         if(tree == null) {
             return null;
@@ -20,7 +225,7 @@ public class IntegerBinaryTree {
         if(unbalanced(tree)) {
             tree = rotate(tree);
         }
-	return tree;
+        return tree;
     }
 
     private IntegerTreeNode rotate(IntegerTreeNode tree) {
@@ -28,9 +233,7 @@ public class IntegerBinaryTree {
             return null;
         }
         IntegerTreeNode head = tree;
-        int leftTree = treeDepth(tree.getLeft());
-        int rightTree = treeDepth(tree.getRight());
-        if(leftTree > rightTree) {
+        if(treeDepth(tree.getLeft()) > treeDepth(tree.getRight())) {
             tree = tree.getLeft();
             head.setLeft(tree.getRight());
             tree.setRight(head);
@@ -52,92 +255,53 @@ public class IntegerBinaryTree {
         return (Math.abs(left - right) > 1);
     }
 
-    public Integer getMin() {
-        if(root == null) {
-            return null;
-        }
-        IntegerTreeNode node = root;
-        while(node.getLeft() != null) {
-            node = node.getLeft();
-        }
-        return node.getValue();
-    }
-
-    public Integer getMax() {
-        if(root == null) {
-            return null;
-        }
-        return getMax(root).getValue();
-    }
-
-    private IntegerTreeNode getMax(IntegerTreeNode node) {
-        if(node == null) {
-            return null;
-        }
-        if(node.getRight() == null) {
-            return node;
-        }
-        return getMax(node.getRight());
-    }
-
-    public int depth() {
-        return treeDepth(root);
-    }
-
-    public String toString() {
-        if(root == null) {
-            return "Empty";
-        }
-        return root.toString();
-    }
-
-    private void addNode(int num, IntegerTreeNode node) {
-        IntegerTreeNode newNode = new IntegerTreeNode(num);
-
-        if(node.getValue() > num) {
-            if(node.getLeft() == null) {
-                node.setLeft(newNode);
-            } else {
-                addNode(num, node.getLeft());
-            }
-        } else {
-            if(node.getRight() == null) {
-                node.setRight(new IntegerTreeNode(num));
-            } else {
-                addNode(num, node.getRight());
-            }
-        }
-
-    }
-
-    private int treeDepth(IntegerTreeNode node) {
-        if(node == null) {
-            return 0;
-        }
-        int left = treeDepth(node.getLeft());
-        int right = treeDepth(node.getRight());
-        return left > right ? left + 1 : right + 1;
-    }
-
     public static void main(String []args) {
-        int[] nums = {1,2,3,3,4,5,6,7,7,8,9};
-        IntegerBinaryTree ibt = new IntegerBinaryTree();
         IntegerBinaryTree ibtOne = new IntegerBinaryTree();
+        IntegerBinaryTree ibtTwo = new IntegerBinaryTree();
 
-        System.out.println("Min: " + ibtOne.getMin());
-        System.out.println("Max: " + ibtOne.getMax());
-        System.out.println(ibtOne);
-        System.out.println("Tree Depth: " + ibtOne.depth());
+        //{8,1,4,2,2,7,4,5,99,23,4,78};
+        int[] nums = {20,10,30,25,27};
 
-        for(int i = 1; i < 17; i++) {
+        // System.out.println("Min: " + ibtOne.getMin());
+        // System.out.println("Max: " + ibtOne.getMax());
+        // System.out.println(ibtOne);
+        // System.out.println("Tree Depth: " + ibtOne.depth());
+        // System.out.println(ibtOne.contains(1));
+
+        // for(int i = 1; i < 17; i++) {
+        //     System.out.println();
+        //     System.out.println("Add " + i);
+        //     ibtOne.add(i);
+        //     System.out.println("Min: " + ibtOne.getMin());
+        //     System.out.println("Max: " + ibtOne.getMax());
+        //     System.out.println(ibtOne);
+        //     System.out.println("Tree Depth: " + ibtOne.depth());
+        // }
+
+        // for(int i = 0; i < 18; i++) {
+        //     System.out.println(ibtOne.contains(i));
+        // }
+
+        for(int i = 0; i < nums.length; i++) {
             System.out.println();
-            System.out.println("Add " + i);
-            ibtOne.add(i);
-            System.out.println("Min: " + ibtOne.getMin());
-            System.out.println("Max: " + ibtOne.getMax());
-            System.out.println(ibtOne);
-            System.out.println("Tree Depth: " + ibtOne.depth());
+            System.out.println("Add " + nums[i]);
+            ibtTwo.add(nums[i]);
+            System.out.println("Min: " + ibtTwo.getMin());
+            System.out.println("Max: " + ibtTwo.getMax());
+            System.out.println(ibtTwo);
+            System.out.println("Tree Depth: " + ibtTwo.depth());
         }
 
+        System.out.println();
+        System.out.println(ibtTwo.contains(27));
+        ibtTwo.delete(27);
+        System.out.println(ibtTwo);
+        System.out.println(ibtTwo.contains(27));
+
+        System.out.println();
+        System.out.println(ibtTwo.contains(25));
+        ibtTwo.delete(25);
+        System.out.println(ibtTwo);
+        System.out.println(ibtTwo.contains(25));
     }
 }
