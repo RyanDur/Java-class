@@ -22,16 +22,12 @@ public class IntegerBinaryTree {
             if(isLeaf(tree)) {
                 result = deleteLeaf(tree, getParent(tree, root));
             } else {
-                while(!result && tree.getLeft() == null) {
+                if(isLeaf(tree.getRight())) {
                     swap(tree.getRight(), tree);
-                    if(isLeaf(tree.getRight())) {
-                        result = deleteLeaf(tree.getRight(), tree);
-                    }
-                    tree = tree.getRight();
-                }
-                if(!result) {
-                    result = delete(tree.getLeft(), tree);
-                }
+		    result = deleteLeaf(tree.getRight(), tree);
+                } else {
+		    result = delete(tree.getLeft(), tree);
+		}
             }
         }
         root = rebalance(root);
