@@ -32,38 +32,6 @@ public class IntegerBinaryTree {
         return result;
     }
 
-    private boolean delete(IntegerTreeNode child) {
-        boolean result = false;
-        if(child == null) {
-            result = false;
-        } else if(isLeaf(child.getLeft())) {
-            result = deleteLeaf(child.getLeft(), child);
-        } else if(child.getRight() == null) {
-            swap(child.getLeft(), child);
-            result = delete(child.getLeft());
-        } else {
-            IntegerTreeNode parent = child;
-            child = getRightMost(child.getLeft(), null);
-            swap(child, parent);
-            if(isLeaf(child)) {
-                result = deleteLeaf(child, getRightMost(parent.getLeft(), child));
-            } else {
-                result = delete(child);
-            }
-        }
-        return result;
-    }
-
-    private IntegerTreeNode getRightMost(IntegerTreeNode tree, IntegerTreeNode condition) {
-        if(tree == null) {
-            return null;
-        }
-        if(tree.getRight() == condition) {
-            return tree;
-        }
-        return getRightMost(tree.getRight(), condition);
-    }
-
     public boolean contains(int num) {
         return getSubroot(num, root) != null;
     }
@@ -83,11 +51,7 @@ public class IntegerBinaryTree {
         if(root == null) {
             return null;
         }
-        IntegerTreeNode node = root;
-        while(node.getRight() != null) {
-            node = node.getRight();
-        }
-        return node.getValue();
+        return getRightMost(root, null).getValue();
     }
 
     public int depth() {
@@ -157,13 +121,7 @@ public class IntegerBinaryTree {
         if(child == null || parent == null) {
             return null;
         }
-        if(parent == child) {
-            return parent;
-        }
-        if(parent.getLeft() == child) {
-            return parent;
-        }
-        if(parent.getRight() == child) {
+        if(parent.getLeft() == child || parent.getRight() == child) {
             return parent;
         }
         if(parent.getValue() < child.getValue()) {
@@ -188,7 +146,6 @@ public class IntegerBinaryTree {
         }
         tree.setLeft(rebalance(tree.getLeft()));
         tree.setRight(rebalance(tree.getRight()));
-
         if(unbalanced(tree)) {
             tree = rotate(tree);
         }
@@ -209,7 +166,6 @@ public class IntegerBinaryTree {
             head.setRight(tree.getLeft());
             tree.setLeft(head);
         }
-
         return tree;
     }
 
@@ -220,6 +176,38 @@ public class IntegerBinaryTree {
         int left = treeDepth(node.getLeft());
         int right = treeDepth(node.getRight());
         return (Math.abs(left - right) > 1);
+    }
+
+    private boolean delete(IntegerTreeNode child) {
+        boolean result = false;
+        if(child == null) {
+            result = false;
+        } else if(isLeaf(child.getLeft())) {
+            result = deleteLeaf(child.getLeft(), child);
+        } else if(child.getRight() == null) {
+            swap(child.getLeft(), child);
+            result = delete(child.getLeft());
+        } else {
+            IntegerTreeNode parent = child;
+            child = getRightMost(child.getLeft(), null);
+            swap(child, parent);
+            if(isLeaf(child)) {
+                result = deleteLeaf(child, getRightMost(parent.getLeft(), child));
+            } else {
+                result = delete(child);
+            }
+        }
+        return result;
+    }
+
+    private IntegerTreeNode getRightMost(IntegerTreeNode tree, IntegerTreeNode condition) {
+        if(tree == null) {
+            return null;
+        }
+        if(tree.getRight() == condition) {
+            return tree;
+        }
+        return getRightMost(tree.getRight(), condition);
     }
 
     public static void main(String []args) {
