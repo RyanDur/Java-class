@@ -44,8 +44,8 @@ public class rbNode {
     public String toString() {
 	String colour = "r";
 	if(black) {
-	    color = "b";
+	    colour = "b";
 	}
-	return "i: "index + ", c: " + colour;
+	return index + "";
     }
 }
