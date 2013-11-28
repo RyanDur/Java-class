@@ -1,7 +1,12 @@
 public class StackImpl<T> implements Stack<T> {
+    private Node<T> head;
 
     @Override
-    public void push(T value) {}
+    public void push(T value) {
+	if(head == null) {
+	    head = new Node<T>(value);
+	}
+    }
 
     @Override
     public T pop() {
@@ -10,7 +15,7 @@ public class StackImpl<T> implements Stack<T> {
 
     @Override
     public T peek() {
-	return null;
+	return head.getValue();
     }
 
     @Override
