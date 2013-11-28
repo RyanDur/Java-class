@@ -66,9 +66,7 @@ public class IntegerBinaryTree {
 	if(node == null) {
 	    return "";
 	}
-	String result = "";
-
-	result += "" + node;
+	String result = "" + node;
 
 	result += " L[" + toString(node.getLeft()) + "]";
 	result += " R[" + toString(node.getRight()) + "]";
