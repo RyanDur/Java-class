@@ -2,24 +2,44 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class TestStackImpl {
-    private Stack<Integer> si;
+    private Stack<String> si;
 
     @Before
     public void setup() {
-	si = new StackImpl<Integer>();
-	si.push(1);
+	si = new StackImpl<>();
+	si.push("Fliss");
     }
 
     @Test
     public void TestShouldAdddToStack() {
-	Integer expected = 1;
+	String expected = "Fliss";
 	assertEquals(expected, si.peek());
     }
 
     @Test
     public void TestShouldAddToTopOfStack() {
-	Integer expected = 2;
+	String expected = "Dave";
 	si.push(expected);
 	assertEquals(expected, si.peek());
+    }
+
+    @Test
+    public void TestShouldRemoveFromTopStack() {
+	String expected = "Dave";
+	si.push(expected);
+	assertEquals(expected, si.peek());
+
+	expected = "Fliss";
+	si.pop();
+	assertEquals(expected, si.peek());
+    }
+
+    @Test
+    public void TestShouldRemoveFromTopAnReturnValueFromStack() {
+	String expected = "Dave";
+	si.push(expected);
+	assertEquals(expected, si.peek());
+
+	assertEquals(expected, si.pop());
     }
 }

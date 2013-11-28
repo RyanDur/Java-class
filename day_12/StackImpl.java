@@ -14,7 +14,10 @@ public class StackImpl<T> implements Stack<T> {
 
     @Override
     public T pop() {
-	return null;
+	Node<T> oldHead = head;
+	head = head.getNext();
+	oldHead.setNext(null);
+	return oldHead.getValue();
     }
 
     @Override
