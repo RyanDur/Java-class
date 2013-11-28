@@ -32,19 +32,6 @@ public class IntegerTreeNode {
     }
 
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("[" + getValue() + " ");
-        if(getLeft() == null) {
-            builder.append("L[]");
-        } else {
-            builder.append("L" + getLeft());
-        }
-        if(getRight() == null) {
-            builder.append("R[]");
-        } else {
-            builder.append("R" + getRight());
-        }
-	builder.append("]");
-        return builder.toString();
+	return "" + getValue();
     }
 }

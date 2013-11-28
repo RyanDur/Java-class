@@ -59,10 +59,20 @@ public class IntegerBinaryTree {
     }
 
     public String toString() {
-        if(root == null) {
-            return "Empty";
-        }
-        return root.toString();
+	return toString(root);
+    }
+
+    private String toString(IntegerTreeNode node) {
+	if(node == null) {
+	    return "";
+	}
+	String result = "";
+
+	result += "" + node;
+
+	result += " L[" + toString(node.getLeft()) + "]";
+	result += " R[" + toString(node.getRight()) + "]";
+	return result;
     }
 
     private void addNode(int num, IntegerTreeNode node) {
