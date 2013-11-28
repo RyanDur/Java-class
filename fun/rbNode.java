@@ -46,6 +46,6 @@ public class rbNode {
 	if(black) {
 	    colour = "b";
 	}
-	return index + "";
+	return "i: " + index + ", c: " + colour;
     }
 }

@@ -30,18 +30,18 @@ public class red_black_tree {
     }
 
     public String toString() {
-	return magicToString(root);
+        return magicToString(root);
 
     }
     private String magicToString(rbNode node) {
-	if(node == null) {
-	    return "";
-	}
-	String result = "";
+        if(node == null) {
+            return "";
+        }
+        String result = "";
 
-	result += node.toString();
-	result += " L[" + magicToString(node.getLeft()) + "]";
-	result += " R[" + magicToString(node.getRight()) + "]";
+        result += node.toString();
+        result += " L[" + magicToString(node.getLeft()) + "]";
+        result += " R[" + magicToString(node.getRight()) + "]";
 
         return result;
     }
