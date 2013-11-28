@@ -3,8 +3,12 @@ public class StackImpl<T> implements Stack<T> {
 
     @Override
     public void push(T value) {
-	if(head == null) {
+	if(isEmpty()) {
 	    head = new Node<T>(value);
+	} else {
+	    Node<T> newNode = new Node<T>(value);
+	    newNode.setNext(head);
+	    head = newNode;
 	}
     }
 
@@ -20,6 +24,6 @@ public class StackImpl<T> implements Stack<T> {
 
     @Override
     public boolean isEmpty() {
-	return false;
+	return head == null;
     }
 }

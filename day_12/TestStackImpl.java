@@ -7,11 +7,18 @@ public class TestStackImpl {
     @Before
     public void setup() {
 	si = new StackImpl<Integer>();
+	si.push(1);
     }
 
     @Test
     public void TestShouldAdddToStack() {
 	Integer expected = 1;
+	assertEquals(expected, si.peek());
+    }
+
+    @Test
+    public void TestShouldAddToTopOfStack() {
+	Integer expected = 2;
 	si.push(expected);
 	assertEquals(expected, si.peek());
     }
