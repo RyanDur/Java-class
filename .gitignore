@@ -1,3 +1,4 @@
 *.class
 *[#]*
 hanoi.org
+*.idea
