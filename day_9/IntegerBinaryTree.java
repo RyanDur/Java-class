@@ -183,6 +183,7 @@ public class IntegerBinaryTree {
         if(child == null) {
             result = false;
         } else if(isLeaf(child.getLeft())) {
+            swap(child.getLeft(), child);
             result = deleteLeaf(child.getLeft(), child);
         } else if(child.getRight() == null) {
             swap(child.getLeft(), child);
