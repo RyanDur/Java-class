@@ -15,13 +15,11 @@ public class QueueImpl<T> implements Queue<T> {
     @Override
     public T retrieve() {
         T result = null;
-        if(head == null) {
-            result = null;
-        } else {
-	    Node<T> oldHead = head;
-	    head = head.getNext();
-	    oldHead.setNext(null);
-	    return oldHead.getValue();
+        if(head != null) {
+            Node<T> oldHead = head;
+            head = head.getNext();
+            oldHead.setNext(null);
+            return oldHead.getValue();
         }
         return result;
     }
