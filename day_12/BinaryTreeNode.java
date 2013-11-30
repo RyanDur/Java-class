@@ -28,6 +28,10 @@ public class BinaryTreeNode<T extends Comparable<T>> extends BiNode<T> {
 	return  getValue().compareTo(node.getValue()) < 0;
     }
 
+    public boolean isLeaf() {
+	return getLeft() == null && getRight() == null;
+    }
+
     public String toString() {
 	return getValue().toString();
     }
