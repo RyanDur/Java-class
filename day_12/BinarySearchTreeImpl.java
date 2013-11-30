@@ -2,13 +2,38 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     private BinaryTreeNode<T> root;
 
     @Override
-        public void add(T value) {
+    public void add(T value) {
         if(root == null) {
             root = new BinaryTreeNode<>(value);
         } else {
             addNode(new BinaryTreeNode<>(value), root);
             root = rebalance(root);
         }
+    }
+
+    @Override
+    public boolean contains(T value) {
+        return false;
+    }
+
+    @Override
+    public T getMin() {
+        return null;
+    }
+
+    @Override
+    public T getMax() {
+        return null;
+    }
+
+    @Override
+    public int depth() {
+        return treeDepth(root);
+    }
+
+    @Override
+    public String toString() {
+        return toString(root);
     }
 
     private BinaryTreeNode<T> rebalance(BinaryTreeNode<T> tree) {
@@ -57,31 +82,6 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
             return false;
         }
         return Math.abs(treeDepth(tree.getLeft()) - treeDepth(tree.getRight())) > 1;
-    }
-
-    @Override
-        public boolean contains(T value) {
-        return false;
-    }
-
-    @Override
-        public T getMin() {
-        return null;
-    }
-
-    @Override
-        public T getMax() {
-        return null;
-    }
-
-    @Override
-        public int depth() {
-        return treeDepth(root);
-    }
-
-    @Override
-        public String toString() {
-        return toString(root);
     }
 
     private int treeDepth(BinaryTreeNode<T> tree) {
