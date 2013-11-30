@@ -3,7 +3,9 @@ import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 public class TestRunner {
     public static void main(String[] args) {
-        Result result = JUnitCore.runClasses(TestStackImpl.class, TestQueueImpl.class);
+        Result result = JUnitCore.runClasses(TestStackImpl.class,
+					     TestQueueImpl.class,
+					     TestBinaryTreeNode.class);
         for (Failure failure : result.getFailures()) {
             System.out.println(failure.toString());
         }
