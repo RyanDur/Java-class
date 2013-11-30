@@ -161,4 +161,15 @@ public class TestBinarySearchTree {
         Integer expected = 9;
         assertEquals(expected, bst.getMax());
     }
+
+    @Test
+    public void testShouldKnowIfTreeContainsValue() {
+        for(int i = 0; i < 10; i++) {
+            bst.add(i);
+        }
+        assertEquals(true, bst.contains(0));
+        assertEquals(true, bst.contains(9));
+        assertEquals(false, bst.contains(10));
+        assertEquals(true, bst.contains(5));
+    }
 }
