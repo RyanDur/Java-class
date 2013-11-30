@@ -5,9 +5,9 @@ public class QueueImpl<T> implements Queue<T> {
     @Override
     public void insert(T value) {
         if(head == null) {
-            head = tail = new Node<T>(value);
+            head = tail = new Node<>(value);
         } else {
-            tail.setNext(new Node<T>(value));
+            tail.setNext(new Node<>(value));
             tail = tail.getNext();
         }
     }
