@@ -138,9 +138,27 @@ public class TestBinarySearchTree {
 
     @Test
     public void testShouldBalnaceTree() {
-	for(int i = 0; i < 10; i++) {
-	    bst.add(i);
-	}
-	assertEquals("6 L[3 L[1 L[0 L[] R[]] R[2 L[] R[]]] R[4 L[] R[5 L[] R[]]]] R[7 L[] R[8 L[] R[9 L[] R[]]]]", bst.toString());
+        for(int i = 0; i < 10; i++) {
+            bst.add(i);
+        }
+        assertEquals("6 L[3 L[1 L[0 L[] R[]] R[2 L[] R[]]] R[4 L[] R[5 L[] R[]]]] R[7 L[] R[8 L[] R[9 L[] R[]]]]", bst.toString());
+    }
+
+    @Test
+    public void testShouldRetrieveTheMinimalValue() {
+        for(int i = 0; i < 10; i++) {
+            bst.add(i);
+        }
+        Integer expected = 0;
+        assertEquals(expected, bst.getMin());
+    }
+
+    @Test
+    public void testShouldRetrieveTheMaximumValue() {
+        for(int i = 0; i < 10; i++) {
+            bst.add(i);
+        }
+        Integer expected = 9;
+        assertEquals(expected, bst.getMax());
     }
 }
