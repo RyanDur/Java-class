@@ -13,11 +13,7 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
 
     @Override
     public boolean contains(T value) {
-        boolean result = false;
-        if(root != null) {
-            result = containsNode(value, root);
-        }
-        return result;
+        return containsNode(value, root);
     }
 
     @Override
@@ -30,7 +26,6 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
             }
             result = node.getValue();
         }
-
         return result;
     }
 
