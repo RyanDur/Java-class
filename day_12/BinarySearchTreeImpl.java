@@ -13,34 +13,38 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
 
     @Override
     public boolean contains(T value) {
-        if(root == null) {
-            return false;
+        boolean result = false;
+        if(root != null) {
+            result = containsNode(value, root);
         }
-        return containsNode(value, root);
+        return result;
     }
 
     @Override
     public T getMin() {
-        if(root == null) {
-            return null;
+        T result = null;
+        if(root != null) {
+            BinaryTreeNode<T> node = root;
+            while(node.getLeft() != null) {
+                node = node.getLeft();
+            }
+            result = node.getValue();
         }
-        BinaryTreeNode<T> node = root;
-        while(node.getLeft() != null) {
-            node = node.getLeft();
-        }
-        return node.getValue();
+
+        return result;
     }
 
     @Override
     public T getMax() {
-        if(root == null) {
-            return null;
+        T result = null;
+        if(root != null) {
+            BinaryTreeNode<T> node = root;
+            while(node.getRight() != null) {
+                node = node.getRight();
+            }
+            result = node.getValue();
         }
-        BinaryTreeNode<T> node = root;
-        while(node.getRight() != null) {
-            node = node.getRight();
-        }
-        return node.getValue();
+        return result;
     }
 
     @Override
@@ -109,47 +113,48 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     }
 
     private boolean unbalanced(BinaryTreeNode<T> tree) {
-        if(tree == null) {
-            return false;
+        boolean result = false;
+        if(tree != null) {
+            result = Math.abs(treeDepth(tree.getLeft()) - treeDepth(tree.getRight())) > 1;
         }
-        return Math.abs(treeDepth(tree.getLeft()) - treeDepth(tree.getRight())) > 1;
+        return result;
     }
 
     private int treeDepth(BinaryTreeNode<T> tree) {
-        if(tree == null) {
-            return 0;
+        int result = 0;
+        if(tree != null) {
+            int left = treeDepth(tree.getLeft());
+            int right = treeDepth(tree.getRight());
+            result = left > right ? left + 1 : right + 1;
         }
-        int left = treeDepth(tree.getLeft());
-        int right = treeDepth(tree.getRight());
-        return left > right ? left + 1 : right + 1;
+        return result;
     }
 
     private void addNode(BinaryTreeNode<T> child, BinaryTreeNode<T> parent) {
-        if(parent == null) {
-            return;
-        }
-        if(child.lessThan(parent)) {
-            if(parent.getLeft() == null) {
-                parent.setLeft(child);
+        if(parent != null) {
+            if(child.lessThan(parent)) {
+                if(parent.getLeft() == null) {
+                    parent.setLeft(child);
+                } else {
+                    addNode(child, parent.getLeft());
+                }
             } else {
-                addNode(child, parent.getLeft());
-            }
-        } else {
-            if(parent.getRight() == null) {
-                parent.setRight(child);
-            } else {
-                addNode(child, parent.getRight());
+                if(parent.getRight() == null) {
+                    parent.setRight(child);
+                } else {
+                    addNode(child, parent.getRight());
+                }
             }
         }
     }
 
     private String toString(BinaryTreeNode<T> tree) {
-        if(tree == null) {
-            return "";
+        String result = "";
+        if(tree != null) {
+            result = tree.toString();
+            result += " L[" + toString(tree.getLeft()) + "]";
+            result += " R[" + toString(tree.getRight()) + "]";
         }
-        String result = tree.toString();
-        result += " L[" + toString(tree.getLeft()) + "]";
-        result += " R[" + toString(tree.getRight()) + "]";
         return result;
     }
 }
