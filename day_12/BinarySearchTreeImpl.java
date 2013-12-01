@@ -24,8 +24,8 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
                     deleteNode(subTree);
                 }
             }
+            root = rebalance(root);
         }
-        root = rebalance(root);
     }
 
     @Override
@@ -35,12 +35,12 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
 
     @Override
     public T getMin() {
-	return getLeftMost(root, null).getValue();
+        return getLeftMost(root, null).getValue();
     }
 
     @Override
     public T getMax() {
-	return getRightMost(root, null).getValue();
+        return getRightMost(root, null).getValue();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     }
 
     @Override
-    public String toString() {
+        public String toString() {
         return toString(root);
     }
 
@@ -95,21 +95,8 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
                 }
             }
         } else {
-            if(tree.getRight().isLeaf()) {
-                tree.swap(tree.getRight());
-                deleteLeaf(tree.getRight(), tree);
-            } else {
-                BinaryTreeNode<T> node = tree;
-                node = getLeftMost(node.getRight(), null);
-                tree.swap(node);
-                tree = getLeftMost(tree.getRight(), node);
-                if(node.isLeaf()) {
-                    deleteLeaf(node, tree);
-                } else {
-                    tree = node;
-                    deleteNode(tree);
-                }
-            }
+            tree.swap(tree.getRight());
+            deleteLeaf(tree.getRight(), tree);
         }
     }
 
@@ -152,10 +139,12 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     }
 
     private BinaryTreeNode<T> rebalance(BinaryTreeNode<T> tree) {
-        if(tree != null && unbalanced(tree)) {
+        if(tree != null) {
             tree.setLeft(rebalance(tree.getLeft()));
             tree.setRight(rebalance(tree.getRight()));
-            tree = rotate(tree);
+            if(unbalanced(tree)) {
+                tree = rotate(tree);
+            }
         }
         return tree;
     }

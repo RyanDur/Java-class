@@ -136,12 +136,23 @@ public class TestBinarySearchTree {
         assertEquals("2 L[1 L[] R[]] R[3 L[] R[]]", bst.toString());
     }
 
+    /**
+     * input   ->     0 - 9
+     *
+     * outcome ->      [3]
+     *                /   \
+     *             [1]     [7]
+     *            /  \     /  \
+     *         [0]   [2] [5]   [8]
+     *                   / \      \
+     *                 [4] [6]     [9]
+     */
     @Test
     public void testShouldBalnaceTree() {
         for(int i = 0; i < 10; i++) {
             bst.add(i);
         }
-        assertEquals("6 L[3 L[1 L[0 L[] R[]] R[2 L[] R[]]] R[4 L[] R[5 L[] R[]]]] R[7 L[] R[8 L[] R[9 L[] R[]]]]", bst.toString());
+        assertEquals("3 L[1 L[0 L[] R[]] R[2 L[] R[]]] R[7 L[5 L[4 L[] R[]] R[6 L[] R[]]] R[8 L[] R[9 L[] R[]]]]", bst.toString());
     }
 
     @Test
@@ -244,43 +255,65 @@ public class TestBinarySearchTree {
     /**
      *                  [10] <- remove
      *                 /    \
-     *              [5]      [15]
-     *             /   \         \
-     *          [3]     [9]       [20]
-     *         /       /         /    \
-     *      [1]     [7]      [17]      [22]
+     *              [5]      [17]
+     *             /  \      /  \
+     *          [3]   [9]  [15]  [20]
+     *         /     /              \
+     *      [1]    [7]              [22]
+     *
+     *
+     *                  [9]
+     *                 /   \
+     *              [5]     [17] <- remove
+     *             /  \     /  \
+     *          [3]   [7] [15]  [20]
+     *         /                   \
+     *      [1]                    [22]
+     *
+     *
+     *                  [9]
+     *                 /   \
+     *              [5]     [20] <- remove
+     *             /  \     /  \
+     *          [3]   [7] [15]  [22]
+     *         /
+     *      [1]
+     *
      *
      *                  [9]
      *                 /   \
      *              [5]     [15] <- remove
-     *             /   \        \
-     *          [3]     [7]      [20]
-     *         /                /    \
-     *      [1]             [17]      [22]
+     *             /  \        \
+     *          [3]   [7]       [22]
+     *         /
+     *      [1]
      *
      *
-     *                  [9]
+     *                  [5]
      *                 /   \
-     *              [5]     [17]
-     *             /   \        \
-     *          [3]   [7]        [20]
-     *         /                     \
-     *      [1]                       [22]
-     *
+     *              [3]     [9]
+     *             /       /   \
+     *          [1]      [7]   [22]
      */
     @Test
-    public void testShouldRemoveFromLargeTree() {
+    public void testShouldRemoveFromLargeTreeAndRebalance() {
         int[] nums = {10, 5, 15, 3, 9, 20, 1, 7, 17, 22};
         for(int num : nums) {
             bst.add(num);
         }
 
-        assertEquals("10 L[5 L[3 L[1 L[] R[]] R[]] R[9 L[7 L[] R[]] R[]]] R[15 L[] R[20 L[17 L[] R[]] R[22 L[] R[]]]]", bst.toString());
+        assertEquals("10 L[5 L[3 L[1 L[] R[]] R[]] R[9 L[7 L[] R[]] R[]]] R[17 L[15 L[] R[]] R[20 L[] R[22 L[] R[]]]]", bst.toString());
 
         bst.delete(10);
-        assertEquals("9 L[5 L[3 L[1 L[] R[]] R[]] R[7 L[] R[]]] R[15 L[] R[20 L[17 L[] R[]] R[22 L[] R[]]]]", bst.toString());
+        assertEquals("9 L[5 L[3 L[1 L[] R[]] R[]] R[7 L[] R[]]] R[17 L[15 L[] R[]] R[20 L[] R[22 L[] R[]]]]", bst.toString());
 
-        bst.delete(15);
-        assertEquals("9 L[5 L[3 L[1 L[] R[]] R[]] R[7 L[] R[]]] R[17 L[] R[20 L[] R[22 L[] R[]]]]", bst.toString());
+        bst.delete(17);
+        assertEquals("9 L[5 L[3 L[1 L[] R[]] R[]] R[7 L[] R[]]] R[20 L[15 L[] R[]] R[22 L[] R[]]]", bst.toString());
+
+        bst.delete(20);
+        assertEquals("9 L[5 L[3 L[1 L[] R[]] R[]] R[7 L[] R[]]] R[15 L[] R[22 L[] R[]]]", bst.toString());
+
+	bst.delete(15);
+        assertEquals("5 L[3 L[1 L[] R[]] R[]] R[9 L[7 L[] R[]] R[22 L[] R[]]]", bst.toString());
     }
 }
