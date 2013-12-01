@@ -240,4 +240,47 @@ public class TestBinarySearchTree {
         assertEquals(false, bst.contains(value1));
         assertEquals("2 L[] R[]", bst.toString());
     }
+
+    /**
+     *                  [10] <- remove
+     *                 /    \
+     *              [5]      [15]
+     *             /   \         \
+     *          [3]     [9]       [20]
+     *         /       /         /    \
+     *      [1]     [7]      [17]      [22]
+     *
+     *                  [9]
+     *                 /   \
+     *              [5]     [15] <- remove
+     *             /   \        \
+     *          [3]     [7]      [20]
+     *         /                /    \
+     *      [1]             [17]      [22]
+     *
+     *
+     *                  [9]
+     *                 /   \
+     *              [5]     [17]
+     *             /   \        \
+     *          [3]   [7]        [20]
+     *         /                     \
+     *      [1]                       [22]
+     *
+     */
+    @Test
+    public void testShouldRemoveFromLargeTree() {
+        int[] nums = {10, 5, 15, 3, 9, 20, 1, 7, 17, 22};
+        for(int num : nums) {
+            bst.add(num);
+        }
+
+        assertEquals("10 L[5 L[3 L[1 L[] R[]] R[]] R[9 L[7 L[] R[]] R[]]] R[15 L[] R[20 L[17 L[] R[]] R[22 L[] R[]]]]", bst.toString());
+
+        bst.delete(10);
+        assertEquals("9 L[5 L[3 L[1 L[] R[]] R[]] R[7 L[] R[]]] R[15 L[] R[20 L[17 L[] R[]] R[22 L[] R[]]]]", bst.toString());
+
+        bst.delete(15);
+        assertEquals("9 L[5 L[3 L[1 L[] R[]] R[]] R[7 L[] R[]]] R[17 L[] R[20 L[] R[22 L[] R[]]]]", bst.toString());
+    }
 }
