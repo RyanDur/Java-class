@@ -10,7 +10,7 @@ public class TestBinarySearchTree {
     }
 
     /**
-     *  [1]
+     *  null -> [1]
      */
     @Test
     public void testShouldAddValueToHeadOFTreeIfEmpty() {
@@ -19,9 +19,9 @@ public class TestBinarySearchTree {
     }
 
     /**
-     *  [1]
-     *    \
-     *     [2]
+     *           [1]
+     *  [1]  ->     \
+     *               [2]
      */
     @Test
     public void testShouldAddValueToTheRightIfValueIsGreater() {
@@ -31,9 +31,9 @@ public class TestBinarySearchTree {
     }
 
     /**
-     *  [1]
-     *    \
-     *     [1]
+     *           [1]
+     *  [1]  ->     \
+     *               [1]
      */
     @Test
     public void testShouldAddValueToTheRightIfValueIsEqual() {
@@ -43,9 +43,9 @@ public class TestBinarySearchTree {
     }
 
     /**
-     *     [2]
-     *     /
-     *  [1]
+     *               [2]
+     *  [2]  ->     /
+     *           [1]
      */
 
     @Test
