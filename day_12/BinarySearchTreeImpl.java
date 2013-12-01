@@ -23,8 +23,8 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
                 } else {
                     deleteNode(subTree);
                 }
+                root = rebalance(root);
             }
-            root = rebalance(root);
         }
     }
 
@@ -49,7 +49,7 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     }
 
     @Override
-        public String toString() {
+    public String toString() {
         return toString(root);
     }
 
