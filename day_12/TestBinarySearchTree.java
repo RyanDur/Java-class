@@ -172,4 +172,72 @@ public class TestBinarySearchTree {
         assertEquals(false, bst.contains(10));
         assertEquals(true, bst.contains(5));
     }
+
+    /**
+     *  [1] -> null
+     */
+    @Test
+    public void testShouldContainNothingIfTreeIsEmpty() {
+        Integer value = 1;
+        bst.add(value);
+        bst.delete(value);
+        assertEquals(false, bst.contains(value));
+        assertEquals("", bst.toString());
+    }
+
+    /**
+     *    [2]       [2]
+     *    / \   ->    \
+     *  [1] [3]       [3]
+     *
+     *    [2]
+     *      \   ->  [2]
+     *      [3]
+     */
+    @Test
+    public void testShouldRemoveLeaf() {
+        Integer value1 = 1;
+        Integer value2 = 2;
+        Integer value3 = 3;
+
+        bst.add(value3);
+        bst.add(value1);
+        bst.add(value2);
+
+        bst.delete(value1);
+        assertEquals(false, bst.contains(value1));
+        assertEquals("2 L[] R[3 L[] R[]]", bst.toString());
+
+        bst.delete(value3);
+        assertEquals(false, bst.contains(value3));
+        assertEquals("2 L[] R[]", bst.toString());
+    }
+
+
+    /**
+     *    [2]
+     *    /     ->  [1]
+     *  [1]
+     *
+     *    [1]
+     *      \   ->  [2]
+     *      [2]
+     */
+    @Test
+    public void testShouldRemoveRoot() {
+        Integer value1 = 1;
+        Integer value2 = 2;
+
+        bst.add(value2);
+        bst.add(value1);
+
+        bst.delete(value2);
+        assertEquals(false, bst.contains(value2));
+        assertEquals("1 L[] R[]", bst.toString());
+
+        bst.add(value2);
+        bst.delete(value1);
+        assertEquals(false, bst.contains(value1));
+        assertEquals("2 L[] R[]", bst.toString());
+    }
 }

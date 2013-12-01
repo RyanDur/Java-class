@@ -5,6 +5,10 @@ public class BiNode<T> extends Node<T> {
 	super(value);
     }
 
+    public void setValue(T value) {
+	super.setValue(value);
+    }
+
     public T getValue() {
 	return super.getValue();
     }

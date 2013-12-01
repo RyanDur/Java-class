@@ -2,7 +2,7 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     private BinaryTreeNode<T> root;
 
     @Override
-    public void add(T value) {
+        public void add(T value) {
         if(root == null) {
             root = new BinaryTreeNode<>(value);
         } else {
@@ -12,12 +12,56 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     }
 
     @Override
-    public boolean contains(T value) {
-        return containsNode(value, root);
+        public void delete(T value) {
+        if(contains(value)) {
+            if(root.isLeaf()) {
+                root = null;
+            } else {
+                BinaryTreeNode<T> subTree = retrieveNode(value, root);
+                if(subTree.isLeaf()) {
+                    deleteLeaf(subTree, retrieveParent(subTree, root));
+                } else {
+		    deleteNode(subTree);
+		}
+            }
+        }
+    }
+
+    private BinaryTreeNode<T> retrieveParent(BinaryTreeNode<T> child, BinaryTreeNode<T> parent) {
+        BinaryTreeNode<T> result = null;
+        if(parent != null) {
+            if(parent.getLeft() == child || parent.getRight() == child) {
+                result = parent;
+            } else if(child.getValue().compareTo(parent.getLeft().getValue()) < 0) {
+                result = retrieveParent(child, parent.getLeft());
+            } else {
+                result = retrieveParent(child, parent.getRight());
+            }
+        }
+        return result;
+    }
+
+    private void deleteNode(BinaryTreeNode<T> tree) {
+        if(tree.getLeft() != null) {
+            tree.swap(tree.getLeft());
+            if(tree.getLeft().isLeaf()) {
+                deleteLeaf(tree.getLeft(), tree);
+            }
+        } else {
+            tree.swap(tree.getRight());
+            if(tree.getRight().isLeaf()) {
+                deleteLeaf(tree.getRight(), tree);
+            }
+        }
     }
 
     @Override
-    public T getMin() {
+        public boolean contains(T value) {
+        return retrieveNode(value, root) != null;
+    }
+
+    @Override
+        public T getMin() {
         T result = null;
         if(root != null) {
             BinaryTreeNode<T> node = root;
@@ -30,7 +74,7 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     }
 
     @Override
-    public T getMax() {
+        public T getMax() {
         T result = null;
         if(root != null) {
             BinaryTreeNode<T> node = root;
@@ -43,27 +87,37 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     }
 
     @Override
-    public int depth() {
+        public int depth() {
         return treeDepth(root);
     }
 
     @Override
-    public String toString() {
+        public String toString() {
         return toString(root);
     }
 
-    private boolean containsNode(T value, BinaryTreeNode<T> tree) {
-        boolean result = false;
-        if(tree != null) {
-            if(value.equals(tree.getValue())) {
-                result = true;
-            } else if(value.compareTo(tree.getValue()) < 0) {
-                result = containsNode(value, tree.getLeft());
+    private BinaryTreeNode<T> retrieveNode(T value, BinaryTreeNode<T> node) {
+        BinaryTreeNode<T> result = null;
+        if(node != null) {
+            if(value.equals(node.getValue())) {
+                result = node;
+            } else if(value.compareTo(node.getValue()) < 0) {
+                result = retrieveNode(value, node.getLeft());
             } else {
-                result = containsNode(value, tree.getRight());
+                result = retrieveNode(value, node.getRight());
             }
         }
         return result;
+    }
+
+    private void deleteLeaf(BinaryTreeNode<T> child, BinaryTreeNode<T> parent) {
+        if(child.isLeaf()) {
+            if(parent.getLeft() == child) {
+                parent.setLeft(null);
+            } else {
+                parent.setRight(null);
+            }
+        }
     }
 
     private BinaryTreeNode<T> rebalance(BinaryTreeNode<T> tree) {

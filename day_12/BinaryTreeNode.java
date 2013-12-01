@@ -4,6 +4,10 @@ public class BinaryTreeNode<T extends Comparable<T>> extends BiNode<T> {
 	super(value);
     }
 
+    public void setValue(T value) {
+	super.setValue(value);
+    }
+
     public T getValue() {
 	return super.getValue();
     }
@@ -30,6 +34,12 @@ public class BinaryTreeNode<T extends Comparable<T>> extends BiNode<T> {
 
     public boolean isLeaf() {
 	return getLeft() == null && getRight() == null;
+    }
+
+    public void swap(BinaryTreeNode<T> node) {
+	T temp = getValue();
+	setValue(node.getValue());
+	node.setValue(temp);
     }
 
     public String toString() {
