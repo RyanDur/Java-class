@@ -35,28 +35,12 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
 
     @Override
     public T getMin() {
-        T result = null;
-        if(root != null) {
-            BinaryTreeNode<T> node = root;
-            while(node.getLeft() != null) {
-                node = node.getLeft();
-            }
-            result = node.getValue();
-        }
-        return result;
+	return getLeftMost(root, null).getValue();
     }
 
     @Override
     public T getMax() {
-        T result = null;
-        if(root != null) {
-            BinaryTreeNode<T> node = root;
-            while(node.getRight() != null) {
-                node = node.getRight();
-            }
-            result = node.getValue();
-        }
-        return result;
+	return getRightMost(root, null).getValue();
     }
 
     @Override
