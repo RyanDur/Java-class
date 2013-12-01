@@ -289,11 +289,39 @@ public class TestBinarySearchTree {
      *      [1]
      *
      *
-     *                  [5]
+     *                  [5] <- remove
      *                 /   \
      *              [3]     [9]
      *             /       /   \
      *          [1]      [7]   [22]
+     *
+     *
+     *                  [3] <-remove
+     *                 /   \
+     *              [1]     [9]
+     *                     /   \
+     *                   [7]   [22]
+     *
+     *
+     *                  [9] <- remove
+     *                 /   \
+     *              [1]     [22]
+     *                 \
+     *                  [7]
+     *
+     *
+     *                  [7] <- remove
+     *                 /   \
+     *              [1]     [22]
+     *
+     *
+     *                  [1] <- remove
+     *                     \
+     *                      [22]
+     *
+     *
+     *                  [22]
+     *
      */
     @Test
     public void testShouldRemoveFromLargeTreeAndRebalance() {
@@ -313,7 +341,25 @@ public class TestBinarySearchTree {
         bst.delete(20);
         assertEquals("9 L[5 L[3 L[1 L[] R[]] R[]] R[7 L[] R[]]] R[15 L[] R[22 L[] R[]]]", bst.toString());
 
-	bst.delete(15);
+        bst.delete(15);
         assertEquals("5 L[3 L[1 L[] R[]] R[]] R[9 L[7 L[] R[]] R[22 L[] R[]]]", bst.toString());
+
+        bst.delete(5);
+        assertEquals("3 L[1 L[] R[]] R[9 L[7 L[] R[]] R[22 L[] R[]]]", bst.toString());
+
+        bst.delete(3);
+        assertEquals("9 L[1 L[] R[7 L[] R[]]] R[22 L[] R[]]", bst.toString());
+
+        bst.delete(9);
+        assertEquals("7 L[1 L[] R[]] R[22 L[] R[]]", bst.toString());
+
+        bst.delete(7);
+        assertEquals("1 L[] R[22 L[] R[]]", bst.toString());
+
+        bst.delete(1);
+        assertEquals("22 L[] R[]", bst.toString());
+
+        bst.delete(22);
+        assertEquals("", bst.toString());
     }
 }

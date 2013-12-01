@@ -2,7 +2,7 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     private BinaryTreeNode<T> root;
 
     @Override
-    public void add(T value) {
+        public void add(T value) {
         if(root == null) {
             root = new BinaryTreeNode<>(value);
         } else {
@@ -12,7 +12,7 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     }
 
     @Override
-    public void delete(T value) {
+        public void delete(T value) {
         if(contains(value)) {
             if(root.isLeaf()) {
                 root = null;
@@ -29,27 +29,27 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     }
 
     @Override
-    public boolean contains(T value) {
+        public boolean contains(T value) {
         return retrieveNode(value, root) != null;
     }
 
     @Override
-    public T getMin() {
+        public T getMin() {
         return getLeftMost(root, null).getValue();
     }
 
     @Override
-    public T getMax() {
+        public T getMax() {
         return getRightMost(root, null).getValue();
     }
 
     @Override
-    public int depth() {
+        public int depth() {
         return treeDepth(root);
     }
 
     @Override
-    public String toString() {
+        public String toString() {
         return toString(root);
     }
 
@@ -218,12 +218,12 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     }
 
     private String toString(BinaryTreeNode<T> tree) {
-        String result = "";
+        StringBuffer result = new StringBuffer();
         if(tree != null) {
-            result = tree.toString();
-            result += " L[" + toString(tree.getLeft()) + "]";
-            result += " R[" + toString(tree.getRight()) + "]";
+            result.append(tree.toString())
+		.append(" L[").append(toString(tree.getLeft())).append("]")
+		.append(" R[").append(toString(tree.getRight())).append("]");
         }
-        return result;
+        return result.toString();
     }
 }
