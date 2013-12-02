@@ -2,7 +2,7 @@ public class DoublyLinkedListImpl<T extends Comparable<T>> implements DoublyLink
     BiNode<T> head = null;
 
     @Override
-        public void add(T value) {
+    public void add(T value) {
         if(head == null) {
             head = new BiNode<>(value);
         } else {
@@ -11,8 +11,8 @@ public class DoublyLinkedListImpl<T extends Comparable<T>> implements DoublyLink
     }
 
     @Override
-        public void delete(T value) {
-	BiNode<T> node = retrieve(value, head);
+    public void delete(T value) {
+        BiNode<T> node = retrieve(value, head);
 
         if(head == node) {
             head = head.getRight();
@@ -28,23 +28,30 @@ public class DoublyLinkedListImpl<T extends Comparable<T>> implements DoublyLink
     }
 
     @Override
-        public int size() {
-        return 0;
+    public int size() {
+        return nodeCount(head);
     }
 
     @Override
-        public String toString() {
+    public String toString() {
         return toString(head);
     }
 
     private BiNode<T> retrieve(T value, BiNode<T> node) {
-	if(node == null) {
-	    return null;
-	}
-	if(node.getValue().equals(value)) {
-	    return node;
-	}
-	return retrieve(value, node.getRight());
+        if(node == null) {
+            return null;
+        }
+        if(node.getValue().equals(value)) {
+            return node;
+        }
+        return retrieve(value, node.getRight());
+    }
+
+    private int nodeCount(BiNode<T> node) {
+        if(node == null) {
+            return 0;
+        }
+        return 1 + nodeCount(node.getRight());
     }
 
     private String toString(BiNode<T> node) {

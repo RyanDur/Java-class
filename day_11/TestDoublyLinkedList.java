@@ -46,4 +46,35 @@ public class TestDoublyLinkedList {
         assertEquals("", dll.toString());
     }
 
+    @Test
+    public void testShouldRemoveFromWithinTheList() {
+        Integer num = 1;
+        Integer num1 = 2;
+        Integer num2 = 3;
+        dll.add(num);
+        dll.add(num1);
+        dll.add(num2);
+        assertEquals(num +" "+ num1 +" "+ num2, dll.toString());
+
+        dll.delete(num1);
+        assertEquals(num +" "+ num2, dll.toString());
+    }
+
+    @Test
+    public void testShouldReturnTheNodeCount() {
+        Integer num = 1;
+        Integer num1 = 2;
+        Integer num2 = 3;
+
+        assertEquals(0, dll.size());
+
+        dll.add(num);
+        assertEquals(1, dll.size());
+
+        dll.add(num1);
+        assertEquals(2, dll.size());
+
+        dll.add(num2);
+        assertEquals(3, dll.size());
+    }
 }
