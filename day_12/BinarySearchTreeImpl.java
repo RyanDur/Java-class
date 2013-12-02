@@ -81,7 +81,7 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
         if(parent != null) {
             if(parent.getLeft() == child || parent.getRight() == child) {
                 result = parent;
-            } else if(child.getValue().compareTo(parent.getLeft().getValue()) < 0) {
+            } else if(child.lessThan(parent.getLeft())) {
                 result = retrieveParent(child, parent.getLeft());
             } else {
                 result = retrieveParent(child, parent.getRight());
