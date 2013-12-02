@@ -1,10 +1,12 @@
+import java.util.ArrayList;
+
 public class MobilePhone extends OldPhone {
-    List[] numbers = new ArrayList();
+    ArrayList<String> numbers = new ArrayList<String>();
 
     public void call(String number) {
 	super.call(number);
 	numbers.add(number);
-	if(list.size() > 10) {
+	if(numbers.size() > 10) {
 	    numbers.remove(0);
 	}
     }

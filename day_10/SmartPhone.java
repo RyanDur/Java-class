@@ -1,4 +1,4 @@
-public class SmartPhone implements MobilePhone {
+public class SmartPhone extends MobilePhone {
 
     public void call(String number) {
 	super.call(number);
