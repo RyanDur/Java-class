@@ -1,8 +1,16 @@
 public class SmartPhone extends MobilePhone {
 
+    public SmartPhone(String brand) {
+        super(brand);
+    }
+
+    public String getBrand() {
+        return super.getBrand();
+    }
+
     public void call(String number) {
         if(number.matches("00.*")) {
-	    System.out.println("Calling " + number + " using the interwebs");
+            System.out.println("Calling " + number + " using the interwebs");
         } else {
             super.call(number);
         }

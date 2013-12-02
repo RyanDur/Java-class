@@ -3,6 +3,14 @@ import java.util.ArrayList;
 public class MobilePhone extends OldPhone {
     ArrayList<String> numbers = new ArrayList<String>();
 
+    public MobilePhone(String brand) {
+	super(brand);
+    }
+
+    public String getBrand() {
+	return super.getBrand();
+    }
+
     public void call(String number) {
 	super.call(number);
 	numbers.add(number);
