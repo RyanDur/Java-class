@@ -2,7 +2,7 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     private BinaryTreeNode<T> root;
 
     @Override
-        public void add(T value) {
+    public void add(T value) {
         if(root == null) {
             root = new BinaryTreeNode<>(value);
         } else {
@@ -12,14 +12,14 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     }
 
     @Override
-        public void delete(T value) {
+    public void delete(T value) {
         if(contains(value)) {
             if(root.isLeaf()) {
                 root = null;
             } else {
                 BinaryTreeNode<T> subTree = retrieveNode(value, root);
                 if(subTree.isLeaf()) {
-                    deleteLeaf(subTree, retrieveParent(subTree, root));
+                    retrieveParent(subTree, root).deleteLeaf(subTree);
                 } else {
                     deleteNode(subTree);
                 }
@@ -29,66 +29,42 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
     }
 
     @Override
-        public boolean contains(T value) {
+    public boolean contains(T value) {
         return retrieveNode(value, root) != null;
     }
 
     @Override
-        public T getMin() {
-        return getLeftMost(root, null).getValue();
+    public T getMin() {
+        return root.getLeftMost().getValue();
     }
 
     @Override
-        public T getMax() {
-        return getRightMost(root, null).getValue();
+    public T getMax() {
+        return root.getRightMost().getValue();
     }
 
     @Override
-        public int depth() {
+    public int depth() {
         return treeDepth(root);
     }
 
     @Override
-        public String toString() {
+    public String toString() {
         return toString(root);
-    }
-
-    private BinaryTreeNode<T> getLeftMost(BinaryTreeNode<T> node, BinaryTreeNode<T> condition) {
-        BinaryTreeNode<T> result = null;
-        if(node != null) {
-            if(node.getLeft() == condition) {
-                result = node;
-            } else {
-                result = getLeftMost(node.getLeft(), condition);
-            }
-        }
-        return result;
-    }
-
-    private BinaryTreeNode<T> getRightMost(BinaryTreeNode<T> node, BinaryTreeNode<T> condition) {
-        BinaryTreeNode<T> result = null;
-        if(node != null) {
-            if(node.getRight() == condition) {
-                result = node;
-            } else {
-                result = getRightMost(node.getRight(), condition);
-            }
-        }
-        return result;
     }
 
     private void deleteNode(BinaryTreeNode<T> tree) {
         if(tree.getLeft() != null) {
             if(tree.getLeft().isLeaf()) {
                 tree.swap(tree.getLeft());
-                deleteLeaf(tree.getLeft(), tree);
+                tree.deleteLeaf(tree.getLeft());
             } else {
                 BinaryTreeNode<T> node = tree;
-                node = getRightMost(node.getLeft(), null);
+                node = node.getLeft().getRightMost();
                 tree.swap(node);
-                tree = getRightMost(tree.getLeft(), node);
+                tree = tree.getLeft().getRightMost(node);
                 if(node.isLeaf()) {
-                    deleteLeaf(node, tree);
+                    tree.deleteLeaf(node);
                 } else {
                     tree = node;
                     deleteNode(tree);
@@ -96,7 +72,7 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
             }
         } else {
             tree.swap(tree.getRight());
-            deleteLeaf(tree.getRight(), tree);
+            tree.deleteLeaf(tree.getRight());
         }
     }
 
@@ -126,16 +102,6 @@ public class BinarySearchTreeImpl<T extends Comparable<T>> implements BinarySear
             }
         }
         return result;
-    }
-
-    private void deleteLeaf(BinaryTreeNode<T> child, BinaryTreeNode<T> parent) {
-        if(child.isLeaf()) {
-            if(parent.getLeft() == child) {
-                parent.setLeft(null);
-            } else {
-                parent.setRight(null);
-            }
-        }
     }
 
     private BinaryTreeNode<T> rebalance(BinaryTreeNode<T> tree) {
