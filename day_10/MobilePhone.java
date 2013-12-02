@@ -23,6 +23,7 @@ public class MobilePhone extends OldPhone {
 	System.out.println("Alarm " + alarm);
     }
 
+    // private : would make the subclass unable to see this function
     public void playGame(String game) {
 	System.out.println("Playing " + game);
     }
