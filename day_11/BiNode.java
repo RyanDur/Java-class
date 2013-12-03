@@ -27,6 +27,10 @@ public class BiNode<T extends Comparable<T>> {
 	return right;
     }
 
+    public boolean lessThan(BiNode<T> node) {
+	return getValue().compareTo(node.getValue()) < 0;
+    }
+
     public String toString() {
 	return value.toString();
     }

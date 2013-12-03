@@ -4,7 +4,8 @@ import org.junit.runner.notification.Failure;
 public class TestRunner {
     public static void main(String[] args) {
         Result result = JUnitCore.runClasses(TestComarator.class,
-					     TestDoublyLinkedList.class);
+					     TestDoublyLinkedList.class,
+					     TestSortedDoublyLinkedList.class);
         for (Failure failure : result.getFailures()) {
             System.out.println(failure.toString());
         }
