@@ -5,7 +5,8 @@ public class TestRunner {
     public static void main(String[] args) {
         Result result = JUnitCore.runClasses(TestComarator.class,
 					     TestDoublyLinkedList.class,
-					     TestSortedDoublyLinkedList.class);
+					     TestSortedDoublyLinkedList.class,
+					     TestStack.class);
         for (Failure failure : result.getFailures()) {
             System.out.println(failure.toString());
         }
