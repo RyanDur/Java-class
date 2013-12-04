@@ -6,7 +6,9 @@ public class TestRunner {
         Result result = JUnitCore.runClasses(TestComarator.class,
 					     TestDoublyLinkedList.class,
 					     TestSortedDoublyLinkedList.class,
-					     TestStack.class);
+					     TestStack.class,
+					     TestSimpleMap.class,
+					     TestSimpleMapBuckets.class);
         for (Failure failure : result.getFailures()) {
             System.out.println(failure.toString());
         }
