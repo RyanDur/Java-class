@@ -37,28 +37,21 @@ public class SimpleMapBucketsImpl<K,V> implements SimpleMap<K,V> {
         int entryKey = generateIndex(key);
         Entry<K,V> entry = buckets[entryKey];
         if(entry != null) {
-            if(entry.getKey() == key) {
-                Entry<K,V> oldEntry = entry;
-                entry = entry.getNext();
-                oldEntry.setNext(null);
-                buckets[entryKey] = entry;
-            } else {
-                delete(key, entry);
-                buckets[entryKey] = entry;
-            }
+            buckets[entryKey] = delete(key, entry);
         }
     }
 
-    private void delete(K key, Entry<K,V> entry){
+    private Entry<K,V> delete(K key, Entry<K,V> entry) {
         if(entry != null) {
-            if(entry.getNext().getKey() == key) {
-                Entry<K,V> oldEntry = entry.getNext();
-                entry.setNext(oldEntry.getNext());
+            if(entry.getKey() == key) {
+                Entry<K,V> oldEntry = entry;
+		entry = entry.getNext();
                 oldEntry.setNext(null);
             } else {
-                delete(key, entry.getNext());
+		entry.setNext(delete(key, entry.getNext()));
             }
         }
+        return entry;
     }
 
 
