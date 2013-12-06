@@ -6,7 +6,8 @@ public class TestRunner {
         Result result = JUnitCore.runClasses(TestStackImpl.class,
 					     TestQueueImpl.class,
 					     TestBinaryTreeNode.class,
-					     TestBinarySearchTree.class);
+					     TestBinarySearchTree.class,
+					     TestSinglyLinkedList.class);
         for (Failure failure : result.getFailures()) {
             System.out.println(failure.toString());
         }
