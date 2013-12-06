@@ -39,5 +39,32 @@ public class TestSinglyLinkedList {
 
         sll.remove(expected);
         assertEquals(expected1 + ", " + expected2, sll.toString());
+
+        sll.add(expected);
+        assertEquals(expected1 + ", " + expected2 + ", " + expected, sll.toString());
+
+        sll.remove(expected);
+        assertEquals(expected1 + ", " + expected2, sll.toString());
+
+        sll.add(expected);
+        assertEquals(expected1 + ", " + expected2 + ", " + expected, sll.toString());
+
+        sll.remove(expected2);
+        assertEquals(expected1 + ", " + expected, sll.toString());
+
+        sll.remove(expected);
+        assertEquals(expected1.toString(), sll.toString());
+
+        sll.remove(expected1);
+        assertEquals("", sll.toString());
+
+        sll.add(expected);
+        sll.add(expected1);
+        sll.add(expected2);
+        assertEquals(expected + ", " + expected1 + ", " + expected2, sll.toString());
+
+	Integer notInList = 4;
+        sll.remove(notInList);
+        assertEquals(expected + ", " + expected1 + ", " + expected2, sll.toString());
     }
 }
