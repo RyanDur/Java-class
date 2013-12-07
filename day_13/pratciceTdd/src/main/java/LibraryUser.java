@@ -1,4 +1,4 @@
-public class LibraryUser {
+public class LibraryUser extends User {
     private Library library;
 
     public LibraryUser(String name) {
@@ -6,6 +6,7 @@ public class LibraryUser {
     }
 
     public void registerLibrary(Library library) {
+	setId(library.generateUserId());
 	this.library = library;
     }
 

@@ -1,5 +1,30 @@
 import org.junit.*;
-import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
-public class TestLibraryUser {}
+public class TestLibraryUser {
+    private final Library mockLibrary = mock(Library.class);
+    private LibraryUser lu;
+
+    @Before
+    public void setup() {
+	lu = new LibraryUser("name");
+    }
+
+    @Test
+    public void shouldRegisterTheUserForALibrary() {
+	String libraryName = "Library name";
+	when(mockLibrary.getName()).thenReturn(libraryName);
+	lu.registerLibrary(mockLibrary);
+	assertThat(libraryName, is(equalTo(lu.getLibrary().getName())));
+    }
+
+    @Test
+    public void shouldHaveAnIDAfterRegisteringForALibrary() {
+	int libraryUserID = 13;
+	when(mockLibrary.generateUserId()).thenReturn(libraryUserID);
+	lu.registerLibrary(mockLibrary);
+	assertThat(libraryUserID, is(equalTo(lu.getId())));
+    }
+}

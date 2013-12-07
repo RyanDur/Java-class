@@ -4,6 +4,7 @@ public class User {
 
     public User(String name) {
 	this.name = name;
+	id = 0;
     }
 
     public String getName() {
