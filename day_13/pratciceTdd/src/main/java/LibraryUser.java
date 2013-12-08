@@ -25,4 +25,8 @@ public class LibraryUser extends User {
     public String[] getBorrowedBookTitles() {
         return borrowedBooks.keySet().toArray(new String[0]);
     }
+
+    public boolean isBorrowingBooks() {
+	return borrowedBooks.size() > 0;
+    }
 }

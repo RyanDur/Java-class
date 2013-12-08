@@ -33,8 +33,16 @@ public class LibraryImpl implements Library {
     }
 
     @Override
-    public void setMaxBooksPerUser(int maxBooksPerUser) {
+    public LibraryUser[] setMaxBooksPerUser(int maxBooksPerUser) {
         this.maxBooksPerUser = maxBooksPerUser;
+        ArrayList<LibraryUser> result = new ArrayList<>();
+	LibraryUser[] users = getUsersBorrowingBooks();
+        for(LibraryUser user : users) {
+            if(user.getBorrowedBookTitles().length > maxBooksPerUser) {
+		result.add(user);
+            }
+        }
+        return result.toArray(new LibraryUser[0]);
     }
 
     @Override
@@ -94,5 +102,21 @@ public class LibraryImpl implements Library {
             }
         }
         return result;
+    }
+
+    @Override
+    public LibraryUser[] getUsersBorrowingBooks() {
+        ArrayList<LibraryUser> result = new ArrayList<>();
+        for(LibraryUser user : libraryUsers.values()) {
+            if(user.isBorrowingBooks()) {
+                result.add(user);
+            }
+        }
+        return result.toArray(new LibraryUser[0]);
+    }
+
+    @Override
+    public LibraryUser[] getUsers() {
+        return libraryUsers.values().toArray(new LibraryUser[0]);
     }
 }

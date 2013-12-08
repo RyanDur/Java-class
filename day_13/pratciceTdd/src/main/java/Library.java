@@ -8,7 +8,7 @@ public interface Library {
 
     int getMaxBooksPerUser();
 
-    void setMaxBooksPerUser(int maxBooksPerUser);
+    LibraryUser[] setMaxBooksPerUser(int maxBooksPerUser);
 
     int getId(String user);
 
@@ -25,4 +25,8 @@ public interface Library {
     int getBookCount();
 
     int getBookBorrowedCount();
+
+    LibraryUser[] getUsersBorrowingBooks();
+
+    LibraryUser[] getUsers();
 }

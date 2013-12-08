@@ -6,6 +6,7 @@ import static org.mockito.Mockito.*;
 public class TestLibrary {
     private Library library;
     private final LibraryUser mockLibraryUser = mock(LibraryUser.class);
+    private final LibraryUser mockLibraryUser1 = mock(LibraryUser.class);
     private final IdGenerator mockIdGenerator = mock(IdGenerator.class);
     private final Book mockBook = mock(Book.class);
 
@@ -100,5 +101,59 @@ public class TestLibrary {
 
         when(mockBook.isTaken()).thenReturn(true);
         assertThat(1, is(equalTo(library.getBookBorrowedCount())));
+    }
+
+    @Test
+    public void shouldGetTheUsersWhoHaveBorrowedBooks() {
+        LibraryUser[] expected = {mockLibraryUser};
+        when(mockLibraryUser.isBorrowingBooks()).thenReturn(true);
+        when(mockLibraryUser1.isBorrowingBooks()).thenReturn(false);
+        when(mockLibraryUser.getName()).thenReturn("Julio");
+        when(mockLibraryUser1.getName()).thenReturn("Juan");
+        library.addUser(mockLibraryUser);
+        library.addUser(mockLibraryUser1);
+
+        assertThat(expected, is(equalTo(library.getUsersBorrowingBooks())));
+    }
+
+    @Test
+    public void shouldGetTheUsers() {
+        LibraryUser[] expected = {mockLibraryUser};
+        when(mockLibraryUser.getName()).thenReturn("Julio");
+        library.addUser(mockLibraryUser);
+        assertThat(expected, is(equalTo(library.getUsers())));
+
+        LibraryUser[] expected1 = {mockLibraryUser, mockLibraryUser1};
+        when(mockLibraryUser1.getName()).thenReturn("Juan");
+        library.addUser(mockLibraryUser1);
+        assertThat(expected1, is(equalTo(library.getUsers())));
+    }
+
+    @Test
+    public void shouldGiveAListOfUsersWhoHaveMoreBooksThanAllowedIfThereIsAChangeInNumberOfBooksAllowed() {
+        when(mockLibraryUser.getName()).thenReturn("Julio");
+        when(mockLibraryUser1.getName()).thenReturn("Juan");
+
+        library.addUser(mockLibraryUser);
+        library.addUser(mockLibraryUser1);
+
+        String[] arr = {"foo","bar","bah"};
+        when(mockLibraryUser.getBorrowedBookTitles()).thenReturn(arr);
+        when(mockLibraryUser1.getBorrowedBookTitles()).thenReturn(arr);
+
+        when(mockLibraryUser.isBorrowingBooks()).thenReturn(true);
+        when(mockLibraryUser1.isBorrowingBooks()).thenReturn(true);
+
+        LibraryUser[] expected = {};
+        assertThat(expected, is(equalTo(library.setMaxBooksPerUser(3))));
+
+        LibraryUser[] expected1 = {mockLibraryUser, mockLibraryUser1};
+        assertThat(expected1, is(equalTo(library.setMaxBooksPerUser(2))));
+
+        String[] arr1 = {"foo","bar"};
+        when(mockLibraryUser1.getBorrowedBookTitles()).thenReturn(arr1);
+
+        LibraryUser[] expected2 = {mockLibraryUser};
+        assertThat(expected2, is(equalTo(library.setMaxBooksPerUser(2))));
     }
 }
