@@ -76,4 +76,29 @@ public class TestLibrary {
 
         assertThat(mockBook, is(equalTo(library.takeBook(title))));
     }
+
+    @Test
+    public void shouldKnowHowManyBooksALibraryHas() {
+        assertThat(0, is(equalTo(library.getBookCount())));
+        library.addBook(mockBook);
+        assertThat(1, is(equalTo(library.getBookCount())));
+    }
+
+    @Test
+    public void shouldKnowHowManyUsersALibraryHas() {
+        assertThat(0, is(equalTo(library.getReaderCount())));
+        library.addUser(mockLibraryUser);
+        assertThat(1, is(equalTo(library.getReaderCount())));
+
+    }
+
+    @Test
+    public void shouldKnowHowManyBooksHaveBeenBorrowed() {
+        when(mockBook.isTaken()).thenReturn(false);
+        library.addBook(mockBook);
+        assertThat(0, is(equalTo(library.getBookBorrowedCount())));
+
+        when(mockBook.isTaken()).thenReturn(true);
+        assertThat(1, is(equalTo(library.getBookBorrowedCount())));
+    }
 }

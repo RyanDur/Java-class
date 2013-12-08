@@ -19,4 +19,10 @@ public interface Library {
     Book takeBook(String title);
 
     void returnBook(Book book);
+
+    int getReaderCount();
+
+    int getBookCount();
+
+    int getBookBorrowedCount();
 }

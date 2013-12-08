@@ -74,4 +74,25 @@ public class LibraryImpl implements Library {
     public void returnBook(Book book) {
         book.setTaken(false);
     }
+
+    @Override
+    public int getReaderCount() {
+        return libraryUsers.size();
+    }
+
+    @Override
+    public int getBookCount() {
+        return shelves.size();
+    }
+
+    @Override
+    public int getBookBorrowedCount() {
+        int result = 0;
+        for(Book book : shelves.values()) {
+            if(book.isTaken()) {
+                result++;
+            }
+        }
+        return result;
+    }
 }
