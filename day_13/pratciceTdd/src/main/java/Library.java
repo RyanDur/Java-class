@@ -13,4 +13,10 @@ public interface Library {
     int getId(String user);
 
     void addUser(LibraryUser user);
+
+    void addBook(Book book);
+
+    Book takeBook(String title);
+
+    void returnBook(Book book);
 }

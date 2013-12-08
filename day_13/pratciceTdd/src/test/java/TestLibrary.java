@@ -7,6 +7,7 @@ public class TestLibrary {
     private Library library;
     private final LibraryUser mockLibraryUser = mock(LibraryUser.class);
     private final IdGenerator mockIdGenerator = mock(IdGenerator.class);
+    private final Book mockBook = mock(Book.class);
 
     @Before
     public void setup() {
@@ -47,5 +48,32 @@ public class TestLibrary {
         int actual = library.getId("Sheldon");
 
         assertThat(libraryUserId, is(equalTo(actual)));
+    }
+
+    @Test
+    public void shouldBeAbleToCheckoutABook() {
+        String title = "Pride and Prejudice";
+        when(mockBook.isTaken()).thenReturn(false);
+        when(mockBook.getTitle()).thenReturn(title);
+
+        library.addBook(mockBook);
+
+        assertThat(mockBook, is(equalTo(library.takeBook(title))));
+    }
+
+    @Test
+    public void shouldBeAbleToReturnABook() {
+        String title = "Pride and Prejudice";
+        when(mockBook.isTaken()).thenReturn(true);
+        when(mockBook.getTitle()).thenReturn(title);
+
+        library.addBook(mockBook);
+
+        assertThat(null, is(equalTo(library.takeBook(title))));
+
+        when(mockBook.isTaken()).thenReturn(false);
+        when(mockBook.getTitle()).thenReturn(title);
+
+        assertThat(mockBook, is(equalTo(library.takeBook(title))));
     }
 }
