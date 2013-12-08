@@ -4,7 +4,7 @@ public class LibraryImpl implements Library {
     private String name;
     private int maxBooksPerUser;
     private IdGenerator ids;
-    private ArrayList<LibraryUser> libraryUsers = new ArrayList<>();
+    private Map<String, LibraryUser> libraryUsers = new HashMap<String, LibraryUser>();
 
     public LibraryImpl(String name) {
         this.name = name;
@@ -39,33 +39,18 @@ public class LibraryImpl implements Library {
     @Override
     public int getId(String user) {
         int result = 0;
-        LibraryUser libraryUser = getUser(user);
-        if(libraryUser != null) {
-	    int id = libraryUser.getId();
-            if(id <= 0) {
-		id = generateUserId();
-                libraryUser.setId(id);
+        if(libraryUsers.containsKey(user)) {
+	    result = libraryUsers.get(user).getId();
+            if(result <= 0) {
+		result = generateUserId();
+                libraryUsers.get(user).setId(result);
             }
-            result = id;
         }
         return result;
     }
 
     @Override
     public void addUser(LibraryUser user) {
-        libraryUsers.add(user);
-    }
-
-    private LibraryUser getUser(String name) {
-        LibraryUser result = null;
-        int i = 0;
-        while(i < libraryUsers.size() && result == null) {
-            if(libraryUsers.get(i).getName().equals(name)) {
-                result = libraryUsers.get(i);
-            } else {
-                i++;
-            }
-        }
-        return result;
+        libraryUsers.put(user.getName(), user);
     }
 }

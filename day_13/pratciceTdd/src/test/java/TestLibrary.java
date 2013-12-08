@@ -30,7 +30,7 @@ public class TestLibrary {
     }
 
     @Test
-    public void shouldAddIdToSueriFTheyDontHaveOne() {
+    public void shouldAddIdToUserIfTheyDontHaveOne() {
         int invalidlibraryUserId = 0;
         int libraryUserId = 13;
         String libraryUserName = "Sheldon";
