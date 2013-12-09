@@ -10,7 +10,6 @@ public class WebPageImpl implements WebPage {
 
     public WebPageImpl(String url) {
         this.url = url;
-	doc = getDocument(url);
     }
 
     @Override
@@ -20,8 +19,12 @@ public class WebPageImpl implements WebPage {
 
     @Override
     public Set<String> getLinks() {
+        doc = getDocument(getUrl());
         Set<String> links = new HashSet<String>();
         Elements jLinks = doc.getElementsByAttribute("href");
+        for(Element link : jLinks) {
+            links.add(link.attr("href"));
+        }
         return Collections.unmodifiableSet(links);
     }
 
@@ -33,10 +36,10 @@ public class WebPageImpl implements WebPage {
 
     @Override
     public Document getDocument(String url) {
-	Document doc = null;
-	try{
-	    doc = Jsoup.connect(url).get();
-	} catch(IOException e) {}
-	return doc;
+        Document doc = null;
+        try{
+            doc = Jsoup.connect(url).get();
+        } catch(IOException e) {}
+        return doc;
     }
 }

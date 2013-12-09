@@ -4,12 +4,14 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
+import java.util.*;
 
 public class TestWebPage {
-    WebPage webPage;
-    String url = "http://en.wikipedia.org/";
-    Document document;
-    String link = "http://example.com/image.ico";
+    private WebPage webPage;
+    private String url = "http://en.wikipedia.org/";
+    private Document document;
+    private String link = "http://example.com/image.ico";
+    private String link1 = "http://clojurescriptkoans.com/";
 
     private String PageProvider1() {
 
@@ -22,6 +24,7 @@ public class TestWebPage {
         html.append("</head>");
         html.append("<body>");
         html.append("something");
+        html.append("<a href=\""+ link1 +"\"></a>");
         html.append("</body>");
         html.append("</html>");
 
@@ -36,5 +39,10 @@ public class TestWebPage {
     @Test
     public void shouldSomething() {
         doReturn(Jsoup.parse(PageProvider1())).when(webPage).getDocument(anyString());
+        Set<String> links = new HashSet<String>();
+        links.add(link);
+        links.add(link1);
+
+        assertThat(links, is(equalTo(webPage.getLinks())));
     }
 }
