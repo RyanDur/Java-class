@@ -1,4 +1,5 @@
-import java.util.Collections.*;
+import java.util.*;
+import org.jsoup.nodes.*;
 
 public interface WebPage {
     /**
@@ -8,21 +9,26 @@ public interface WebPage {
     String getUrl();
 
     /**
-     * Returns all the links on this webpage. *
+     * Returns all the links on this webpage.
+     *
      * Implementing classes should return a read-only view of this
-     * set, using Collections.unmodifiableSet(). *
+     * set, using Collections.unmodifiableSet().
+     *
      * @return all the links on this webpage.
      */
     Set<String> getLinks();
 
     /**
-     * Returns all the emails on this webpage. *
+     * Returns all the emails on this webpage.
+     *
      * Implementing classes should return a read-only view of this
-     * set, using Collections.unmodifiableSet(). *
+     * set, using Collections.unmodifiableSet().
+     *
      * @return all the emails on this webpage.
      */
     Set<String> getEmails();
 
+    Document getDocument(String url);
     // Also, implementing classes should override equals() to
     // ensure that p1.equals(p2) returns true if and only if
     // p1.getUrl().equals(p2.getUrl()) returns true
