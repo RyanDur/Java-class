@@ -1,3 +1,5 @@
+import java.util.Collections.*;
+
 public interface WebPage {
     /**
      * Returns the URL that identifies this web page.

@@ -1,3 +1,5 @@
+import java.util.Collections.*;
+
 public interface SpamBot {
     /**
      * Sets the seed.
