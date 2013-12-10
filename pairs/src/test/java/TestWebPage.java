@@ -12,6 +12,8 @@ public class TestWebPage {
     private Document document;
     private String link = "http://example.com/image.ico";
     private String link1 = "http://clojurescriptkoans.com/";
+    private String email = "asdfgsdf@sfgsfb.com";
+    private String email1 = "csfgsdfg@sfgsdfgd.com";
 
     private String PageProvider1() {
 
@@ -23,8 +25,9 @@ public class TestWebPage {
         html.append("<link rel=\"icon\" href=\""+ link +"\" />");
         html.append("</head>");
         html.append("<body>");
-        html.append("something");
+        html.append("something " + email);
         html.append("<a href=\""+ link1 +"\"></a>");
+        html.append("<div data-email=\""+ email1 +"\"></a>");
         html.append("</body>");
         html.append("</html>");
 
@@ -37,12 +40,22 @@ public class TestWebPage {
     }
 
     @Test
-    public void shouldSomething() {
-        doReturn(Jsoup.parse(PageProvider1())).when(webPage).getDocument(anyString());
+    public void shouldRetrieveAllTheLinksOnthePage() {
+        doReturn(Jsoup.parse(PageProvider1())).when(webPage).getDocument();
         Set<String> links = new HashSet<String>();
         links.add(link);
         links.add(link1);
 
         assertThat(links, is(equalTo(webPage.getLinks())));
+    }
+
+    @Test
+    public void shouldRetrieveAllTheEmailsOnthePage() {
+        doReturn(Jsoup.parse(PageProvider1())).when(webPage).getDocument();
+        Set<String> emails = new HashSet<String>();
+        emails.add(email);
+        emails.add(email1);
+
+        assertEquals(emails, webPage.getEmails());
     }
 }

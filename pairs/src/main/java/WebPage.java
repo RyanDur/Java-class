@@ -28,7 +28,7 @@ public interface WebPage {
      */
     Set<String> getEmails();
 
-    Document getDocument(String url);
+    Document getDocument();
     // Also, implementing classes should override equals() to
     // ensure that p1.equals(p2) returns true if and only if
     // p1.getUrl().equals(p2.getUrl()) returns true
