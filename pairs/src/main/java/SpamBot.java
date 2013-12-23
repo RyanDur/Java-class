@@ -1,7 +1,10 @@
 import java.util.*;
 import java.net.MalformedURLException;
+import java.io.*;
+
 
 public interface SpamBot {
+
     /**
      * Sets the seed.
      *
@@ -12,8 +15,8 @@ public interface SpamBot {
      *
      * @param seedUrl the first URL to fetch and analyse
      */
-    void setSeed(String seedUrl) throws MalformedURLException;
-
+    void setSeed(String seedUrl);
+	
     /**
      * Returns the seed URL. * @return the seed URL.
      */
@@ -28,11 +31,11 @@ public interface SpamBot {
      * @param count the number of threads (i.e. crawlers) to start in parallel
      */
     void setThreads(int count);
-
+		
     /**
      * Initiates the scanning process.
      */
-    void scanSite();
+    void scanSite() throws FileNotFoundException, IOException;
 
     /**
      * Returns all the emails gathered.
@@ -41,5 +44,8 @@ public interface SpamBot {
      * have stopped. If it is called before that point, its
      * behaviour is not defined.
      */
-    Set<String> getEMails();
+    //Set<String> getEMails();
+	//
+	int getNumOfThreads();
+	WebPage getWebPage();
 }

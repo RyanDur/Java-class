@@ -7,7 +7,7 @@ public class IdGeneratorImpl implements IdGenerator {
     @Override
     public IdGenerator getInstance() {
         if(IdGeneratorImpl.instance == null) {
-            IdGeneratorImpl.instance = new IdGeneratorImpl();
+            IdGeneratorImpl.instance = new this();
         }
         return IdGeneratorImpl.instance;
     }
