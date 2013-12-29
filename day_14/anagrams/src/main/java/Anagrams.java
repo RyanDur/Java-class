@@ -1,26 +1,22 @@
 import java.util.*;
 
 public class Anagrams {
-    private static String[] result;
 
     public static Set<String> getAnagrams(String word) {
-        int length = Factorial.fac(word.length());
-        result = new String[length];
-	anag(word, "");
-	String[] anagrams = result;
-	result = null;
+	String[] anagrams = anag(word, "", new String[Factorial.fac(word.length())]);
         return new HashSet<String>(Arrays.asList(anagrams));
     }
 
-    private static void anag(String s1, String s2)  {
-        if(s1.length() == 0) {
+    private static String[] anag(String word, String anagram, String[] result) {
+        if(word.length() == 0) {
 	    int j = 0;
 	    while(result[j] != null) {j++;}
-            result[j] = s2;
+            result[j] = anagram;
         }
-        for(int i = 0; i < s1.length(); i++) {
-            anag(s1.substring(0, i) + s1.substring(i+1, s1.length()), s1.charAt(i) + s2);
+        for(int i = 0; i < word.length(); i++) {
+            result = anag(word.substring(0, i) + word.substring(i+1, word.length()),
+			  word.charAt(i) + anagram, result);
         }
+	return result;
     }
-
 }
