@@ -13,3 +13,4 @@ build
 gradlew*
 settings.gradle
 assignment2ContactManager/*
+*.DS_Store
